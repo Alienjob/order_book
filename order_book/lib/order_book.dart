@@ -1,7 +1,6 @@
 library order_book;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:order_book/src/order_book_widget.dart';
+export 'package:order_book/src/domain/model.dart';
+
+

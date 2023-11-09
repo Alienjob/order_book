@@ -10,15 +10,15 @@ import 'package:order_book/src/widgets/order_book_root_widget.dart';
 
 
 class OrderBookWidget extends StatelessWidget {
-  const OrderBookWidget({Key? key, required this.market, required this.configuration}) : super(key: key);
+  const OrderBookWidget({Key? key, this.market, required this.configuration}) : super(key: key);
 
-  final MarketPriceEntity market;
+  final MarketPriceEntity? market;
   final OrderBookPresentationConfiguration configuration;
 
   @override
   Widget build(BuildContext context) {
     return OrderBookBlocWrapper(
-      market: market,
+      market: market??MarketPriceEntity(),
       child: OrderBookRootWidget(configuration : configuration),
     );
   }
