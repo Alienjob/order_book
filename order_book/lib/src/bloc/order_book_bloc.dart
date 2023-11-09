@@ -17,7 +17,7 @@ part 'order_book_bloc.freezed.dart';
 
 class OrderBookBloc extends Bloc<OrderBookEvent, OrderBookState> {
   MarketPriceEntity? market;
-  final OrderBookRepository repository;
+  final IOrderBookRepository repository;
 
   StreamSubscription<OrderBookViewData>? _listener;
 

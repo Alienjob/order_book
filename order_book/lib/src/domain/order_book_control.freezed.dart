@@ -73,11 +73,11 @@ class _$OrderBookControlCopyWithImpl<$Res, $Val extends OrderBookControl>
 }
 
 /// @nodoc
-abstract class _$$_OrderBookControlCopyWith<$Res>
+abstract class _$$OrderBookControlImplCopyWith<$Res>
     implements $OrderBookControlCopyWith<$Res> {
-  factory _$$_OrderBookControlCopyWith(
-          _$_OrderBookControl value, $Res Function(_$_OrderBookControl) then) =
-      __$$_OrderBookControlCopyWithImpl<$Res>;
+  factory _$$OrderBookControlImplCopyWith(_$OrderBookControlImpl value,
+          $Res Function(_$OrderBookControlImpl) then) =
+      __$$OrderBookControlImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_OrderBookControlCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderBookControlCopyWithImpl<$Res>
-    extends _$OrderBookControlCopyWithImpl<$Res, _$_OrderBookControl>
-    implements _$$_OrderBookControlCopyWith<$Res> {
-  __$$_OrderBookControlCopyWithImpl(
-      _$_OrderBookControl _value, $Res Function(_$_OrderBookControl) _then)
+class __$$OrderBookControlImplCopyWithImpl<$Res>
+    extends _$OrderBookControlCopyWithImpl<$Res, _$OrderBookControlImpl>
+    implements _$$OrderBookControlImplCopyWith<$Res> {
+  __$$OrderBookControlImplCopyWithImpl(_$OrderBookControlImpl _value,
+      $Res Function(_$OrderBookControlImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_OrderBookControlCopyWithImpl<$Res>
     Object? round = null,
     Object? listening = null,
   }) {
-    return _then(_$_OrderBookControl(
+    return _then(_$OrderBookControlImpl(
       section: null == section
           ? _value.section
           : section // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,8 @@ class __$$_OrderBookControlCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderBookControl implements _OrderBookControl {
-  const _$_OrderBookControl(
+class _$OrderBookControlImpl implements _OrderBookControl {
+  const _$OrderBookControlImpl(
       {required this.section, required this.round, required this.listening});
 
   @override
@@ -140,7 +140,7 @@ class _$_OrderBookControl implements _OrderBookControl {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderBookControl &&
+            other is _$OrderBookControlImpl &&
             (identical(other.section, section) || other.section == section) &&
             (identical(other.round, round) || other.round == round) &&
             (identical(other.listening, listening) ||
@@ -153,15 +153,16 @@ class _$_OrderBookControl implements _OrderBookControl {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderBookControlCopyWith<_$_OrderBookControl> get copyWith =>
-      __$$_OrderBookControlCopyWithImpl<_$_OrderBookControl>(this, _$identity);
+  _$$OrderBookControlImplCopyWith<_$OrderBookControlImpl> get copyWith =>
+      __$$OrderBookControlImplCopyWithImpl<_$OrderBookControlImpl>(
+          this, _$identity);
 }
 
 abstract class _OrderBookControl implements OrderBookControl {
   const factory _OrderBookControl(
       {required final OrderBookPresentationSection section,
       required final OrderBookRound round,
-      required final bool listening}) = _$_OrderBookControl;
+      required final bool listening}) = _$OrderBookControlImpl;
 
   @override
   OrderBookPresentationSection get section;
@@ -171,6 +172,6 @@ abstract class _OrderBookControl implements OrderBookControl {
   bool get listening;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderBookControlCopyWith<_$_OrderBookControl> get copyWith =>
+  _$$OrderBookControlImplCopyWith<_$OrderBookControlImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

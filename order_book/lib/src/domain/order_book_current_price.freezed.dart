@@ -77,11 +77,12 @@ class _$OrderBookCurrentPriceCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderBookCurrentPriceCopyWith<$Res>
+abstract class _$$OrderBookCurrentPriceImplCopyWith<$Res>
     implements $OrderBookCurrentPriceCopyWith<$Res> {
-  factory _$$_OrderBookCurrentPriceCopyWith(_$_OrderBookCurrentPrice value,
-          $Res Function(_$_OrderBookCurrentPrice) then) =
-      __$$_OrderBookCurrentPriceCopyWithImpl<$Res>;
+  factory _$$OrderBookCurrentPriceImplCopyWith(
+          _$OrderBookCurrentPriceImpl value,
+          $Res Function(_$OrderBookCurrentPriceImpl) then) =
+      __$$OrderBookCurrentPriceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -89,11 +90,12 @@ abstract class _$$_OrderBookCurrentPriceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderBookCurrentPriceCopyWithImpl<$Res>
-    extends _$OrderBookCurrentPriceCopyWithImpl<$Res, _$_OrderBookCurrentPrice>
-    implements _$$_OrderBookCurrentPriceCopyWith<$Res> {
-  __$$_OrderBookCurrentPriceCopyWithImpl(_$_OrderBookCurrentPrice _value,
-      $Res Function(_$_OrderBookCurrentPrice) _then)
+class __$$OrderBookCurrentPriceImplCopyWithImpl<$Res>
+    extends _$OrderBookCurrentPriceCopyWithImpl<$Res,
+        _$OrderBookCurrentPriceImpl>
+    implements _$$OrderBookCurrentPriceImplCopyWith<$Res> {
+  __$$OrderBookCurrentPriceImplCopyWithImpl(_$OrderBookCurrentPriceImpl _value,
+      $Res Function(_$OrderBookCurrentPriceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +106,7 @@ class __$$_OrderBookCurrentPriceCopyWithImpl<$Res>
     Object? change = null,
     Object? changePercent = null,
   }) {
-    return _then(_$_OrderBookCurrentPrice(
+    return _then(_$OrderBookCurrentPriceImpl(
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -127,8 +129,8 @@ class __$$_OrderBookCurrentPriceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderBookCurrentPrice implements _OrderBookCurrentPrice {
-  const _$_OrderBookCurrentPrice(
+class _$OrderBookCurrentPriceImpl implements _OrderBookCurrentPrice {
+  const _$OrderBookCurrentPriceImpl(
       {required this.price,
       required this.priceUSD,
       required this.change,
@@ -152,7 +154,7 @@ class _$_OrderBookCurrentPrice implements _OrderBookCurrentPrice {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderBookCurrentPrice &&
+            other is _$OrderBookCurrentPriceImpl &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.priceUSD, priceUSD) ||
                 other.priceUSD == priceUSD) &&
@@ -168,9 +170,9 @@ class _$_OrderBookCurrentPrice implements _OrderBookCurrentPrice {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderBookCurrentPriceCopyWith<_$_OrderBookCurrentPrice> get copyWith =>
-      __$$_OrderBookCurrentPriceCopyWithImpl<_$_OrderBookCurrentPrice>(
-          this, _$identity);
+  _$$OrderBookCurrentPriceImplCopyWith<_$OrderBookCurrentPriceImpl>
+      get copyWith => __$$OrderBookCurrentPriceImplCopyWithImpl<
+          _$OrderBookCurrentPriceImpl>(this, _$identity);
 }
 
 abstract class _OrderBookCurrentPrice implements OrderBookCurrentPrice {
@@ -178,7 +180,7 @@ abstract class _OrderBookCurrentPrice implements OrderBookCurrentPrice {
       {required final double price,
       required final double priceUSD,
       required final double change,
-      required final double changePercent}) = _$_OrderBookCurrentPrice;
+      required final double changePercent}) = _$OrderBookCurrentPriceImpl;
 
   @override
   double get price;
@@ -190,6 +192,6 @@ abstract class _OrderBookCurrentPrice implements OrderBookCurrentPrice {
   double get changePercent;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderBookCurrentPriceCopyWith<_$_OrderBookCurrentPrice> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderBookCurrentPriceImplCopyWith<_$OrderBookCurrentPriceImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

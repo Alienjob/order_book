@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderBookState {
-  BlocAction? get action => throw _privateConstructorUsedError;
   MarketPriceEntity? get market => throw _privateConstructorUsedError;
   OrderBookViewData? get orderBook => throw _privateConstructorUsedError;
   OrderBookControl? get control => throw _privateConstructorUsedError;
@@ -34,8 +33,7 @@ abstract class $OrderBookStateCopyWith<$Res> {
       _$OrderBookStateCopyWithImpl<$Res, OrderBookState>;
   @useResult
   $Res call(
-      {BlocAction? action,
-      MarketPriceEntity? market,
+      {MarketPriceEntity? market,
       OrderBookViewData? orderBook,
       OrderBookControl? control,
       OrderBookCurrentPrice? currentPrice});
@@ -57,17 +55,12 @@ class _$OrderBookStateCopyWithImpl<$Res, $Val extends OrderBookState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? action = freezed,
     Object? market = freezed,
     Object? orderBook = freezed,
     Object? control = freezed,
     Object? currentPrice = freezed,
   }) {
     return _then(_value.copyWith(
-      action: freezed == action
-          ? _value.action
-          : action // ignore: cast_nullable_to_non_nullable
-              as BlocAction?,
       market: freezed == market
           ? _value.market
           : market // ignore: cast_nullable_to_non_nullable
@@ -113,16 +106,15 @@ class _$OrderBookStateCopyWithImpl<$Res, $Val extends OrderBookState>
 }
 
 /// @nodoc
-abstract class _$$_OrderBookStateCopyWith<$Res>
+abstract class _$$OrderBookStateImplCopyWith<$Res>
     implements $OrderBookStateCopyWith<$Res> {
-  factory _$$_OrderBookStateCopyWith(
-          _$_OrderBookState value, $Res Function(_$_OrderBookState) then) =
-      __$$_OrderBookStateCopyWithImpl<$Res>;
+  factory _$$OrderBookStateImplCopyWith(_$OrderBookStateImpl value,
+          $Res Function(_$OrderBookStateImpl) then) =
+      __$$OrderBookStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {BlocAction? action,
-      MarketPriceEntity? market,
+      {MarketPriceEntity? market,
       OrderBookViewData? orderBook,
       OrderBookControl? control,
       OrderBookCurrentPrice? currentPrice});
@@ -134,27 +126,22 @@ abstract class _$$_OrderBookStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderBookStateCopyWithImpl<$Res>
-    extends _$OrderBookStateCopyWithImpl<$Res, _$_OrderBookState>
-    implements _$$_OrderBookStateCopyWith<$Res> {
-  __$$_OrderBookStateCopyWithImpl(
-      _$_OrderBookState _value, $Res Function(_$_OrderBookState) _then)
+class __$$OrderBookStateImplCopyWithImpl<$Res>
+    extends _$OrderBookStateCopyWithImpl<$Res, _$OrderBookStateImpl>
+    implements _$$OrderBookStateImplCopyWith<$Res> {
+  __$$OrderBookStateImplCopyWithImpl(
+      _$OrderBookStateImpl _value, $Res Function(_$OrderBookStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? action = freezed,
     Object? market = freezed,
     Object? orderBook = freezed,
     Object? control = freezed,
     Object? currentPrice = freezed,
   }) {
-    return _then(_$_OrderBookState(
-      action: freezed == action
-          ? _value.action
-          : action // ignore: cast_nullable_to_non_nullable
-              as BlocAction?,
+    return _then(_$OrderBookStateImpl(
       market: freezed == market
           ? _value.market
           : market // ignore: cast_nullable_to_non_nullable
@@ -177,16 +164,10 @@ class __$$_OrderBookStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderBookState implements _OrderBookState {
-  _$_OrderBookState(
-      {this.action,
-      this.market,
-      this.orderBook,
-      this.control,
-      this.currentPrice});
+class _$OrderBookStateImpl implements _OrderBookState {
+  _$OrderBookStateImpl(
+      {this.market, this.orderBook, this.control, this.currentPrice});
 
-  @override
-  final BlocAction? action;
   @override
   final MarketPriceEntity? market;
   @override
@@ -198,15 +179,14 @@ class _$_OrderBookState implements _OrderBookState {
 
   @override
   String toString() {
-    return 'OrderBookState(action: $action, market: $market, orderBook: $orderBook, control: $control, currentPrice: $currentPrice)';
+    return 'OrderBookState(market: $market, orderBook: $orderBook, control: $control, currentPrice: $currentPrice)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderBookState &&
-            (identical(other.action, action) || other.action == action) &&
+            other is _$OrderBookStateImpl &&
             (identical(other.market, market) || other.market == market) &&
             (identical(other.orderBook, orderBook) ||
                 other.orderBook == orderBook) &&
@@ -216,26 +196,24 @@ class _$_OrderBookState implements _OrderBookState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, action, market, orderBook, control, currentPrice);
+  int get hashCode =>
+      Object.hash(runtimeType, market, orderBook, control, currentPrice);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderBookStateCopyWith<_$_OrderBookState> get copyWith =>
-      __$$_OrderBookStateCopyWithImpl<_$_OrderBookState>(this, _$identity);
+  _$$OrderBookStateImplCopyWith<_$OrderBookStateImpl> get copyWith =>
+      __$$OrderBookStateImplCopyWithImpl<_$OrderBookStateImpl>(
+          this, _$identity);
 }
 
 abstract class _OrderBookState implements OrderBookState {
   factory _OrderBookState(
-      {final BlocAction? action,
-      final MarketPriceEntity? market,
+      {final MarketPriceEntity? market,
       final OrderBookViewData? orderBook,
       final OrderBookControl? control,
-      final OrderBookCurrentPrice? currentPrice}) = _$_OrderBookState;
+      final OrderBookCurrentPrice? currentPrice}) = _$OrderBookStateImpl;
 
-  @override
-  BlocAction? get action;
   @override
   MarketPriceEntity? get market;
   @override
@@ -246,7 +224,7 @@ abstract class _OrderBookState implements OrderBookState {
   OrderBookCurrentPrice? get currentPrice;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderBookStateCopyWith<_$_OrderBookState> get copyWith =>
+  _$$OrderBookStateImplCopyWith<_$OrderBookStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -335,23 +313,24 @@ class _$OrderBookEventCopyWithImpl<$Res, $Val extends OrderBookEvent>
 }
 
 /// @nodoc
-abstract class _$$InitCopyWith<$Res> {
-  factory _$$InitCopyWith(_$Init value, $Res Function(_$Init) then) =
-      __$$InitCopyWithImpl<$Res>;
+abstract class _$$InitImplCopyWith<$Res> {
+  factory _$$InitImplCopyWith(
+          _$InitImpl value, $Res Function(_$InitImpl) then) =
+      __$$InitImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitCopyWithImpl<$Res>
-    extends _$OrderBookEventCopyWithImpl<$Res, _$Init>
-    implements _$$InitCopyWith<$Res> {
-  __$$InitCopyWithImpl(_$Init _value, $Res Function(_$Init) _then)
+class __$$InitImplCopyWithImpl<$Res>
+    extends _$OrderBookEventCopyWithImpl<$Res, _$InitImpl>
+    implements _$$InitImplCopyWith<$Res> {
+  __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Init implements Init {
-  const _$Init();
+class _$InitImpl implements Init {
+  const _$InitImpl();
 
   @override
   String toString() {
@@ -361,7 +340,7 @@ class _$Init implements Init {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Init);
+        (other.runtimeType == runtimeType && other is _$InitImpl);
   }
 
   @override
@@ -455,24 +434,24 @@ class _$Init implements Init {
 }
 
 abstract class Init implements OrderBookEvent {
-  const factory Init() = _$Init;
+  const factory Init() = _$InitImpl;
 }
 
 /// @nodoc
-abstract class _$$DataRecievedCopyWith<$Res> {
-  factory _$$DataRecievedCopyWith(
-          _$DataRecieved value, $Res Function(_$DataRecieved) then) =
-      __$$DataRecievedCopyWithImpl<$Res>;
+abstract class _$$DataRecievedImplCopyWith<$Res> {
+  factory _$$DataRecievedImplCopyWith(
+          _$DataRecievedImpl value, $Res Function(_$DataRecievedImpl) then) =
+      __$$DataRecievedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrderBookViewData data});
 }
 
 /// @nodoc
-class __$$DataRecievedCopyWithImpl<$Res>
-    extends _$OrderBookEventCopyWithImpl<$Res, _$DataRecieved>
-    implements _$$DataRecievedCopyWith<$Res> {
-  __$$DataRecievedCopyWithImpl(
-      _$DataRecieved _value, $Res Function(_$DataRecieved) _then)
+class __$$DataRecievedImplCopyWithImpl<$Res>
+    extends _$OrderBookEventCopyWithImpl<$Res, _$DataRecievedImpl>
+    implements _$$DataRecievedImplCopyWith<$Res> {
+  __$$DataRecievedImplCopyWithImpl(
+      _$DataRecievedImpl _value, $Res Function(_$DataRecievedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -480,7 +459,7 @@ class __$$DataRecievedCopyWithImpl<$Res>
   $Res call({
     Object? data = null,
   }) {
-    return _then(_$DataRecieved(
+    return _then(_$DataRecievedImpl(
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -491,8 +470,8 @@ class __$$DataRecievedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DataRecieved implements DataRecieved {
-  const _$DataRecieved({required this.data});
+class _$DataRecievedImpl implements DataRecieved {
+  const _$DataRecievedImpl({required this.data});
 
   @override
   final OrderBookViewData data;
@@ -506,7 +485,7 @@ class _$DataRecieved implements DataRecieved {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DataRecieved &&
+            other is _$DataRecievedImpl &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -516,8 +495,8 @@ class _$DataRecieved implements DataRecieved {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DataRecievedCopyWith<_$DataRecieved> get copyWith =>
-      __$$DataRecievedCopyWithImpl<_$DataRecieved>(this, _$identity);
+  _$$DataRecievedImplCopyWith<_$DataRecievedImpl> get copyWith =>
+      __$$DataRecievedImplCopyWithImpl<_$DataRecievedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -608,29 +587,29 @@ class _$DataRecieved implements DataRecieved {
 
 abstract class DataRecieved implements OrderBookEvent {
   const factory DataRecieved({required final OrderBookViewData data}) =
-      _$DataRecieved;
+      _$DataRecievedImpl;
 
   OrderBookViewData get data;
   @JsonKey(ignore: true)
-  _$$DataRecievedCopyWith<_$DataRecieved> get copyWith =>
+  _$$DataRecievedImplCopyWith<_$DataRecievedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RoundChangedCopyWith<$Res> {
-  factory _$$RoundChangedCopyWith(
-          _$RoundChanged value, $Res Function(_$RoundChanged) then) =
-      __$$RoundChangedCopyWithImpl<$Res>;
+abstract class _$$RoundChangedImplCopyWith<$Res> {
+  factory _$$RoundChangedImplCopyWith(
+          _$RoundChangedImpl value, $Res Function(_$RoundChangedImpl) then) =
+      __$$RoundChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrderBookRound round});
 }
 
 /// @nodoc
-class __$$RoundChangedCopyWithImpl<$Res>
-    extends _$OrderBookEventCopyWithImpl<$Res, _$RoundChanged>
-    implements _$$RoundChangedCopyWith<$Res> {
-  __$$RoundChangedCopyWithImpl(
-      _$RoundChanged _value, $Res Function(_$RoundChanged) _then)
+class __$$RoundChangedImplCopyWithImpl<$Res>
+    extends _$OrderBookEventCopyWithImpl<$Res, _$RoundChangedImpl>
+    implements _$$RoundChangedImplCopyWith<$Res> {
+  __$$RoundChangedImplCopyWithImpl(
+      _$RoundChangedImpl _value, $Res Function(_$RoundChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -638,7 +617,7 @@ class __$$RoundChangedCopyWithImpl<$Res>
   $Res call({
     Object? round = null,
   }) {
-    return _then(_$RoundChanged(
+    return _then(_$RoundChangedImpl(
       round: null == round
           ? _value.round
           : round // ignore: cast_nullable_to_non_nullable
@@ -649,8 +628,8 @@ class __$$RoundChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RoundChanged implements RoundChanged {
-  const _$RoundChanged({required this.round});
+class _$RoundChangedImpl implements RoundChanged {
+  const _$RoundChangedImpl({required this.round});
 
   @override
   final OrderBookRound round;
@@ -664,7 +643,7 @@ class _$RoundChanged implements RoundChanged {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RoundChanged &&
+            other is _$RoundChangedImpl &&
             (identical(other.round, round) || other.round == round));
   }
 
@@ -674,8 +653,8 @@ class _$RoundChanged implements RoundChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RoundChangedCopyWith<_$RoundChanged> get copyWith =>
-      __$$RoundChangedCopyWithImpl<_$RoundChanged>(this, _$identity);
+  _$$RoundChangedImplCopyWith<_$RoundChangedImpl> get copyWith =>
+      __$$RoundChangedImplCopyWithImpl<_$RoundChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -766,31 +745,31 @@ class _$RoundChanged implements RoundChanged {
 
 abstract class RoundChanged implements OrderBookEvent {
   const factory RoundChanged({required final OrderBookRound round}) =
-      _$RoundChanged;
+      _$RoundChangedImpl;
 
   OrderBookRound get round;
   @JsonKey(ignore: true)
-  _$$RoundChangedCopyWith<_$RoundChanged> get copyWith =>
+  _$$RoundChangedImplCopyWith<_$RoundChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PresentationSectionChangedCopyWith<$Res> {
-  factory _$$PresentationSectionChangedCopyWith(
-          _$PresentationSectionChanged value,
-          $Res Function(_$PresentationSectionChanged) then) =
-      __$$PresentationSectionChangedCopyWithImpl<$Res>;
+abstract class _$$PresentationSectionChangedImplCopyWith<$Res> {
+  factory _$$PresentationSectionChangedImplCopyWith(
+          _$PresentationSectionChangedImpl value,
+          $Res Function(_$PresentationSectionChangedImpl) then) =
+      __$$PresentationSectionChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrderBookPresentationSection presentationSection});
 }
 
 /// @nodoc
-class __$$PresentationSectionChangedCopyWithImpl<$Res>
-    extends _$OrderBookEventCopyWithImpl<$Res, _$PresentationSectionChanged>
-    implements _$$PresentationSectionChangedCopyWith<$Res> {
-  __$$PresentationSectionChangedCopyWithImpl(
-      _$PresentationSectionChanged _value,
-      $Res Function(_$PresentationSectionChanged) _then)
+class __$$PresentationSectionChangedImplCopyWithImpl<$Res>
+    extends _$OrderBookEventCopyWithImpl<$Res, _$PresentationSectionChangedImpl>
+    implements _$$PresentationSectionChangedImplCopyWith<$Res> {
+  __$$PresentationSectionChangedImplCopyWithImpl(
+      _$PresentationSectionChangedImpl _value,
+      $Res Function(_$PresentationSectionChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -798,7 +777,7 @@ class __$$PresentationSectionChangedCopyWithImpl<$Res>
   $Res call({
     Object? presentationSection = null,
   }) {
-    return _then(_$PresentationSectionChanged(
+    return _then(_$PresentationSectionChangedImpl(
       presentationSection: null == presentationSection
           ? _value.presentationSection
           : presentationSection // ignore: cast_nullable_to_non_nullable
@@ -809,8 +788,8 @@ class __$$PresentationSectionChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PresentationSectionChanged implements PresentationSectionChanged {
-  const _$PresentationSectionChanged({required this.presentationSection});
+class _$PresentationSectionChangedImpl implements PresentationSectionChanged {
+  const _$PresentationSectionChangedImpl({required this.presentationSection});
 
   @override
   final OrderBookPresentationSection presentationSection;
@@ -824,7 +803,7 @@ class _$PresentationSectionChanged implements PresentationSectionChanged {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PresentationSectionChanged &&
+            other is _$PresentationSectionChangedImpl &&
             (identical(other.presentationSection, presentationSection) ||
                 other.presentationSection == presentationSection));
   }
@@ -835,9 +814,9 @@ class _$PresentationSectionChanged implements PresentationSectionChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PresentationSectionChangedCopyWith<_$PresentationSectionChanged>
-      get copyWith => __$$PresentationSectionChangedCopyWithImpl<
-          _$PresentationSectionChanged>(this, _$identity);
+  _$$PresentationSectionChangedImplCopyWith<_$PresentationSectionChangedImpl>
+      get copyWith => __$$PresentationSectionChangedImplCopyWithImpl<
+          _$PresentationSectionChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -929,29 +908,29 @@ class _$PresentationSectionChanged implements PresentationSectionChanged {
 abstract class PresentationSectionChanged implements OrderBookEvent {
   const factory PresentationSectionChanged(
           {required final OrderBookPresentationSection presentationSection}) =
-      _$PresentationSectionChanged;
+      _$PresentationSectionChangedImpl;
 
   OrderBookPresentationSection get presentationSection;
   @JsonKey(ignore: true)
-  _$$PresentationSectionChangedCopyWith<_$PresentationSectionChanged>
+  _$$PresentationSectionChangedImplCopyWith<_$PresentationSectionChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ListeningChangedCopyWith<$Res> {
-  factory _$$ListeningChangedCopyWith(
-          _$ListeningChanged value, $Res Function(_$ListeningChanged) then) =
-      __$$ListeningChangedCopyWithImpl<$Res>;
+abstract class _$$ListeningChangedImplCopyWith<$Res> {
+  factory _$$ListeningChangedImplCopyWith(_$ListeningChangedImpl value,
+          $Res Function(_$ListeningChangedImpl) then) =
+      __$$ListeningChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool listening});
 }
 
 /// @nodoc
-class __$$ListeningChangedCopyWithImpl<$Res>
-    extends _$OrderBookEventCopyWithImpl<$Res, _$ListeningChanged>
-    implements _$$ListeningChangedCopyWith<$Res> {
-  __$$ListeningChangedCopyWithImpl(
-      _$ListeningChanged _value, $Res Function(_$ListeningChanged) _then)
+class __$$ListeningChangedImplCopyWithImpl<$Res>
+    extends _$OrderBookEventCopyWithImpl<$Res, _$ListeningChangedImpl>
+    implements _$$ListeningChangedImplCopyWith<$Res> {
+  __$$ListeningChangedImplCopyWithImpl(_$ListeningChangedImpl _value,
+      $Res Function(_$ListeningChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -959,7 +938,7 @@ class __$$ListeningChangedCopyWithImpl<$Res>
   $Res call({
     Object? listening = null,
   }) {
-    return _then(_$ListeningChanged(
+    return _then(_$ListeningChangedImpl(
       listening: null == listening
           ? _value.listening
           : listening // ignore: cast_nullable_to_non_nullable
@@ -970,8 +949,8 @@ class __$$ListeningChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ListeningChanged implements ListeningChanged {
-  const _$ListeningChanged({required this.listening});
+class _$ListeningChangedImpl implements ListeningChanged {
+  const _$ListeningChangedImpl({required this.listening});
 
   @override
   final bool listening;
@@ -985,7 +964,7 @@ class _$ListeningChanged implements ListeningChanged {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ListeningChanged &&
+            other is _$ListeningChangedImpl &&
             (identical(other.listening, listening) ||
                 other.listening == listening));
   }
@@ -996,8 +975,9 @@ class _$ListeningChanged implements ListeningChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ListeningChangedCopyWith<_$ListeningChanged> get copyWith =>
-      __$$ListeningChangedCopyWithImpl<_$ListeningChanged>(this, _$identity);
+  _$$ListeningChangedImplCopyWith<_$ListeningChangedImpl> get copyWith =>
+      __$$ListeningChangedImplCopyWithImpl<_$ListeningChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1088,10 +1068,10 @@ class _$ListeningChanged implements ListeningChanged {
 
 abstract class ListeningChanged implements OrderBookEvent {
   const factory ListeningChanged({required final bool listening}) =
-      _$ListeningChanged;
+      _$ListeningChangedImpl;
 
   bool get listening;
   @JsonKey(ignore: true)
-  _$$ListeningChangedCopyWith<_$ListeningChanged> get copyWith =>
+  _$$ListeningChangedImplCopyWith<_$ListeningChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
