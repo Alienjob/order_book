@@ -10,6 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  decimal: any
+  uuid: any
+  json_annotation: ^4.8.1
+  flutter_bloc: any
+  freezed_annotation: ^2.4.1
+  collection: ^1.17.1
+  declarative_animated_list: ^0.2.0
 
 dev_dependencies:
   flutter_test:
