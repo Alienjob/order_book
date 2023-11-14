@@ -40,6 +40,6 @@ Map<String, dynamic> _$OrderBookChangeEntityToJson(
     };
 
 const _$BuySellEnumMap = {
-  BuySell.buy: 'buy',
-  BuySell.sell: 'sell',
+  BuySell.buy: 0,
+  BuySell.sell: 1,
 };

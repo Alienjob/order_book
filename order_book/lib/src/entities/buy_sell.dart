@@ -1,9 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-
-enum BuySell { buy, sell }
+enum BuySell {
+  @JsonValue(0)
+  buy,
+  @JsonValue(1)
+  sell,
+}
 
 extension BuySellExtension on BuySell {
   String getName() {
@@ -23,6 +28,7 @@ extension BuySellExtension on BuySell {
         return 'Sell';
     }
   }
+
   Color get getColor {
     switch (this) {
       case BuySell.buy:
@@ -41,7 +47,7 @@ extension BuySellExtension on BuySell {
     }
   }
 
-    int get number {
+  int get number {
     switch (this) {
       case BuySell.buy:
         return 0;
