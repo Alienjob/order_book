@@ -7,14 +7,25 @@ part "order_book_change_entity.g.dart";
 
 @JsonSerializable()
 class OrderBookChangeEntity {
+
   int? id;
+
   int? marketId;
+
   BuySell? side;
+
+  @JsonKey(toJson: _decimalToJson)
   Decimal? amount;
+
+  @JsonKey(toJson: _decimalToJson)
   Decimal? price;
+
   int? count;
+
   bool? add;
+
   DateTime? time;
+
   int? timestamp;
 
   OrderBookChangeEntity({
@@ -49,4 +60,6 @@ class OrderBookChangeEntity {
       _$OrderBookChangeEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrderBookChangeEntityToJson(this);
+
+  static double _decimalToJson(Decimal? value) => value?.toDouble()??0;
 }

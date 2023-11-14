@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-
   const MyHomePage({super.key, required this.title});
 
   final String title;
@@ -32,17 +31,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  bool _useMock = true;
   @override
   Widget build(BuildContext context) {
+    final configuration = OrderBookPresentationConfiguration.vertical;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          Switch(
+            value: _useMock,
+            onChanged: (_) => setState(() {
+              _useMock = !_useMock;
+            }),
+          )
+        ],
       ),
-      body: const OrderBookWidget(configuration: OrderBookPresentationConfiguration.vertical,
-        
-      ),
+      body: _useMock
+          ? OrderBookWidget(
+              configuration: configuration,
+            )
+          : OrderBookWidget(
+              configuration: configuration,
+            ),
     );
   }
 }

@@ -18,7 +18,7 @@ class DropDownRound extends StatelessWidget {
       width: 50,
       child: BlocBuilder<OrderBookBloc, OrderBookState>(
         builder: (context, state) {
-          return Placeholder();
+          return Placeholder(fallbackHeight: 16,);
           // return DropDownInput(
           //   needSpacer: false,
           //   showBorder: false,
