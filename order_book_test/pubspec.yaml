@@ -12,8 +12,6 @@ dependencies:
     sdk: flutter
   order_book:
     path: /Users/airm1/work/order_book/order_book
-  visiblity_manager:
-    path: /Users/airm1/work/visiblity_manager/visiblity_manager
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

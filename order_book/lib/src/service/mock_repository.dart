@@ -8,6 +8,7 @@ import 'package:order_book/src/domain/order_book.dart';
 import 'package:order_book/src/domain/order_book_entity_set.dart';
 import 'package:order_book/src/domain/order_book_view.dart';
 import 'package:order_book/src/entities/buy_sell.dart';
+import 'package:order_book/src/entities/market_price_entity.dart';
 import 'package:order_book/src/entities/order_book_change_entity.dart';
 import 'package:order_book/src/entities/order_book_entity.dart';
 import 'package:order_book/src/entities/socket_responce.dart';
@@ -20,9 +21,7 @@ class MockRepository extends IOrderBookRepository {
   final StreamController<SocketResponse> mockStreamController = StreamController<SocketResponse> ();
   Timer? _mockSocketTimer;
   
-  MockRepository({
-    required super.market,
-  }) {
+  MockRepository(){
     socketListener = mockStreamController.stream.listen(socketListenerHandler);
     subscribeToMarket();
     controller = StreamController<OrderBookViewData>();
@@ -91,7 +90,10 @@ class MockRepository extends IOrderBookRepository {
       final isDelete =
           (_rand.nextInt(20) <= list.length - OrderBookStyle.mockDeleteLimit);
       final isDeleteFirst = _rand.nextBool();
-      price = list.keys.toList()[_rand.nextInt(list.keys.length - 1)];
+      if(list.isNotEmpty){
+      price = list.keys.toList()[_rand.nextInt(list.keys.length - 1)];}else{
+        price = Decimal.fromInt(_rand.nextInt(5));
+      }
       if (isDelete && isDeleteFirst) {
         price = list.keys.reduce(
             (a, b) => (sideAsks) ? ((a < b) ? a : b) : ((a < b) ? b : a));

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:order_book/src/domain/model.dart';
+import 'package:order_book/src/service/staircase_data_store.dart';
 import 'package:order_book/src/service/style.dart';
+import 'package:order_book/src/widgets/order_book_quantity_animator.dart';
 import 'package:order_book/src/widgets/order_book_quantity_indicator.dart';
 import 'package:order_book/src/widgets/order_book_quantity_indicator_manageble.dart';
-
+import 'package:visiblity_manager/visiblity_manager.dart';
 
 class OrderBookStaircaseTile extends StatelessWidget {
   const OrderBookStaircaseTile({
@@ -48,11 +50,27 @@ class OrderBookStaircaseTile extends StatelessWidget {
           flexTransparent: 1 - _changedIndicator(),
           indicatorColor: _indicatorColor(),
         ),
-        OrderBookQuantityIndicatorManageble(
-          id: data.price,
-          aligement: aligement,
-          total: data.total,
-          indicatorColor: _indicatorColor(),
+        VisiblityManageble(
+          key: ValueKey(data.price),
+          builder: () {
+            double maxTotal = data.total;
+            int flexTransparent = 1;
+            int flexData = 1;
+            var notificator = VisiblityNotificator.of(context);
+            final store = notificator.store;
+            if (store is StaircaseDataStore) {
+              maxTotal = store.data?.maxTotal??data.total;
+              flexTransparent = 1;
+              flexData = 1;
+            }
+            return OrderBookQuantityAnimator(
+              child: OrderBookQuantityIndicator(
+                  aligement: aligement,
+                  flexTransparent: flexTransparent,
+                  flexData: flexData,
+                  indicatorColor: _indicatorColor()),
+            );
+          },
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,

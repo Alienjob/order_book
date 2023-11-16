@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:order_book/src/domain/model.dart';
 import 'package:order_book/src/service/localization.dart';
+import 'package:order_book/src/service/staircase_data_store.dart';
 import 'package:order_book/src/service/style.dart';
 import 'package:order_book/src/widgets/order_book_staircase_animator.dart';
 import 'package:order_book/src/widgets/order_book_total_indicator_manager.dart';
-
+import 'package:visiblity_manager/visiblity_manager.dart';
 
 class OrderBookStaircaseWidget extends StatefulWidget {
   OrderBookStaircaseWidget({
@@ -29,14 +30,14 @@ class OrderBookStaircaseWidget extends StatefulWidget {
 }
 
 class _OrderBookStaircaseWidgetState extends State<OrderBookStaircaseWidget> {
-
-
   late Map<double, OrderBookTileData> visibleData;
   late List<OrderBookTileData> _data;
 
+  late final StaircaseDataStore store;
 
   @override
   void initState() {
+    store = StaircaseDataStore();
     visibleData = {};
     _configure();
 
@@ -55,18 +56,28 @@ class _OrderBookStaircaseWidgetState extends State<OrderBookStaircaseWidget> {
   }
 
   _configure() {
-    // TODO: убрать в бэк 
     _data = List.of(widget.data);
     bool asc = (widget.sort == OrderBookMainAxisSort.asc);
-
     _data.sort(
       (a, b) => ((asc ? a : b).price).compareTo((asc ? b : a).price),
     );
   }
 
+  void onChange<TValue, TCommon>(
+      {VisiblityCalculableDataStore<TValue, TCommon>? dataStore,
+      required VisiblityStore visiblyStore}) {
+    if (dataStore is StaircaseDataStore) {
+      final StaircaseData? staircaseData = (dataStore as StaircaseDataStore)
+          .calculate(visiblyStore.getVisibleKeys());
+      if (staircaseData != null) store.update(staircaseData);
+      Future.delayed(Duration.zero, () async {
+        setState(() {});
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     final localization = Localization();
     return Expanded(
       child: Column(
@@ -84,28 +95,34 @@ class _OrderBookStaircaseWidgetState extends State<OrderBookStaircaseWidget> {
                           style: OrderBookStyle.txtHeader,
                         ),
                       ),
-                      Text(localization.orderBookAmount, style: OrderBookStyle.txtHeader),
+                      Text(localization.orderBookAmount,
+                          style: OrderBookStyle.txtHeader),
                     ]
                   : [
-                      Text(localization.orderBookAmount, style: OrderBookStyle.txtHeader),
+                      Text(localization.orderBookAmount,
+                          style: OrderBookStyle.txtHeader),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(localization.orderBookPrice, style: OrderBookStyle.txtHeader),
+                        child: Text(localization.orderBookPrice,
+                            style: OrderBookStyle.txtHeader),
                       ),
                     ],
             ),
           ),
           Expanded(
-            child: OrderBookTotalIndicatorManager(
+            child: 
+            VisiblityManagerCalculableData.calculable(
+              store: store,
+              onChange: onChange,
               child: OrderBookStaircaseAnimator(
                 data: _data,
                 config: OrderBookTileConfig(
-                  type: widget.type, 
-                  aligement: widget.aligement, 
+                  type: widget.type,
+                  aligement: widget.aligement,
                   configuration: widget.configuration,
-                  ),
+                ),
               ),
-            )
+            ),
           ),
         ],
       ),

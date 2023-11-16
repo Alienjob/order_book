@@ -11,12 +11,9 @@ import 'package:order_book/src/service/order_book_repository.dart';
 
 class BinanceRepository extends IOrderBookRepository {
 
-  final BinanceApi api;
+  final BinanceApi api = BinanceApi();
 
-  BinanceRepository({
-    required this.api,
-    required super.market,
-  }) {
+  BinanceRepository() {
     socketListener = api.subject.listen(socketListenerHandler);
     subscribeToMarket();
     controller = StreamController<OrderBookViewData>();
@@ -41,7 +38,7 @@ class BinanceRepository extends IOrderBookRepository {
 
     try {
       final result = await api.getOrderBook(
-        marketId: market.id,
+        marketId: market?.id??0,
         limit: limit,
         offset: offset,
       );
@@ -66,7 +63,7 @@ class BinanceRepository extends IOrderBookRepository {
 
   @override
   void subscribeToMarket() {
-    Map<String, int> data = {"marketId": market.id!};
+    Map<String, int> data = {"marketId": market?.id??0};
     api.send(jsonEncode(data));
   }
 }

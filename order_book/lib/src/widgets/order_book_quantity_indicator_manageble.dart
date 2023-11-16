@@ -4,8 +4,8 @@ import 'package:order_book/src/widgets/order_book_quantity_animator.dart';
 import 'package:order_book/src/widgets/order_book_quantity_indicator.dart';
 import 'package:order_book/src/widgets/order_book_total_indicator_manager.dart';
 
-class OrderBookQuantityIndicatorManageble extends StatefulWidget {
-  const OrderBookQuantityIndicatorManageble({
+class _OrderBookQuantityIndicatorManageble extends StatefulWidget {
+  const _OrderBookQuantityIndicatorManageble({
     super.key,
     required this.id,
     required this.aligement,
@@ -19,12 +19,12 @@ class OrderBookQuantityIndicatorManageble extends StatefulWidget {
   final double total;
 
   @override
-  State<OrderBookQuantityIndicatorManageble> createState() =>
+  State<_OrderBookQuantityIndicatorManageble> createState() =>
       _OrderBookQuantityIndicatorManagebleState();
 }
 
 class _OrderBookQuantityIndicatorManagebleState
-    extends State<OrderBookQuantityIndicatorManageble> {
+    extends State<_OrderBookQuantityIndicatorManageble> {
   static const double flexPrecision = 1000;
 
   double _total = 0;
@@ -51,7 +51,7 @@ class _OrderBookQuantityIndicatorManagebleState
   }
 
   @override
-  void didUpdateWidget(OrderBookQuantityIndicatorManageble oldWidget) {
+  void didUpdateWidget(_OrderBookQuantityIndicatorManageble oldWidget) {
     super.didUpdateWidget(oldWidget);
     onInit(widget.id, this, widget.total);
     _total = widget.total;

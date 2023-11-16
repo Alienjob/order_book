@@ -18,9 +18,9 @@ import 'package:order_book/src/service/style.dart';
 
 
 class IOrderBookRepository {
-  final MarketPriceEntity market;
+  final MarketPriceEntity? market;
 
-  IOrderBookRepository({required this.market});
+  IOrderBookRepository({this.market});
 
   Future<void> loadSnapshot() {
     throw 'You need to override this method';

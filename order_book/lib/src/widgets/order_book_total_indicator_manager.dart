@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:order_book/src/service/style.dart';
 
 // Виджет
-class OrderBookTotalIndicatorManager extends StatefulWidget {
-  const OrderBookTotalIndicatorManager({super.key, required this.child});
+class _OrderBookTotalIndicatorManager extends StatefulWidget {
+  const _OrderBookTotalIndicatorManager({super.key, required this.child});
 
   final Widget child;
 
   @override
-  State<OrderBookTotalIndicatorManager> createState() => _OrderState();
+  State<_OrderBookTotalIndicatorManager> createState() => _OrderState();
 }
 
 // Стейт
-class _OrderState extends State<OrderBookTotalIndicatorManager> {
+class _OrderState extends State<_OrderBookTotalIndicatorManager> {
   final _TotalIndicatorStore _store = _TotalIndicatorStore();
   final _VisiblityStore _visiblyStore = _VisiblityStore();
   Timer? _updateTimer;
@@ -31,7 +31,7 @@ class _OrderState extends State<OrderBookTotalIndicatorManager> {
   }
 
   @override
-  void didUpdateWidget(covariant OrderBookTotalIndicatorManager oldWidget) {
+  void didUpdateWidget(covariant _OrderBookTotalIndicatorManager oldWidget) {
     _updateTimer?.cancel();
     _updateTimer = null;
     _updateTimer =
