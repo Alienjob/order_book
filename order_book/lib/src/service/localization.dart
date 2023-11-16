@@ -1,4 +1,4 @@
 class Localization {
-  String orderBookPrice = 'orderBookPrice';
-  String orderBookAmount = 'orderBookAmount';
+  String orderBookPrice = 'Price';
+  String orderBookAmount = 'Amount';
 }

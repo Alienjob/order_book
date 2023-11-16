@@ -22,6 +22,7 @@ class StaircaseDataStore
     }
   }
 
+  @override
   StaircaseData? calculate(List<Key> keys) {
     double maxTotal = 0;
     double minTotal = 0;

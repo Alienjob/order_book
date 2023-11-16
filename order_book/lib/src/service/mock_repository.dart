@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:math';
 
@@ -16,12 +15,12 @@ import 'package:order_book/src/service/order_book_repository.dart';
 import 'package:order_book/src/service/style.dart';
 
 class MockRepository extends IOrderBookRepository {
-
   final Random _rand = Random();
-  final StreamController<SocketResponse> mockStreamController = StreamController<SocketResponse> ();
+  final StreamController<SocketResponse> mockStreamController =
+      StreamController<SocketResponse>();
   Timer? _mockSocketTimer;
-  
-  MockRepository(){
+
+  MockRepository() {
     socketListener = mockStreamController.stream.listen(socketListenerHandler);
     subscribeToMarket();
     controller = StreamController<OrderBookViewData>();
@@ -36,13 +35,11 @@ class MockRepository extends IOrderBookRepository {
 
   @override
   Future<void> loadSnapshot() async {
-    
     startLoadSnapshot();
 
     late OrderBookEntitySet _entitySet;
     _entitySet = OrderBookEntitySet();
     _entitySet.entities.add(mock_data());
-
 
     _entitySet.changes = List.from(changes);
     changes.clear();
@@ -55,28 +52,24 @@ class MockRepository extends IOrderBookRepository {
 
   @override
   void subscribeToMarket() {
-
     _mockSocketTimer?.cancel();
     _mockSocketTimer = null;
 
     _mockSocketTimer =
         Timer.periodic(OrderBookStyle.mockGenerateFrequency, (timer) {
-      mockStreamController.add(
-        SocketResponse(
+      mockStreamController.add(SocketResponse(
           time: DateTime.now(),
           timestamp: DateTime.now().millisecondsSinceEpoch,
-          data: 
-        _randomChange().toJson()));
+          data: _randomChange().toJson()));
     });
   }
-
 
   OrderBookChangeEntity _randomChange() {
     bool sideAsks = _rand.nextBool();
     final list = sideAsks
         ? orderBook.data.askPriceQuantity
         : orderBook.data.bidPriceQuantity;
-    final isNewPrice = (_rand.nextInt(30) >= list.length);
+    final isNewPrice = (_rand.nextInt(5) >= list.length);
     Decimal price;
     late final Decimal quantity;
     final Decimal delta =
@@ -90,8 +83,9 @@ class MockRepository extends IOrderBookRepository {
       final isDelete =
           (_rand.nextInt(20) <= list.length - OrderBookStyle.mockDeleteLimit);
       final isDeleteFirst = _rand.nextBool();
-      if(list.isNotEmpty){
-      price = list.keys.toList()[_rand.nextInt(list.keys.length - 1)];}else{
+      if (list.isNotEmpty) {
+        price = list.keys.toList()[_rand.nextInt(list.keys.length)];
+      } else {
         price = Decimal.fromInt(_rand.nextInt(5));
       }
       if (isDelete && isDeleteFirst) {
@@ -124,8 +118,4 @@ class MockRepository extends IOrderBookRepository {
     );
     return data;
   }
-
 }
-  
-
-

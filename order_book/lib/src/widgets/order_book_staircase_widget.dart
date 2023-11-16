@@ -4,7 +4,7 @@ import 'package:order_book/src/service/localization.dart';
 import 'package:order_book/src/service/staircase_data_store.dart';
 import 'package:order_book/src/service/style.dart';
 import 'package:order_book/src/widgets/order_book_staircase_animator.dart';
-import 'package:order_book/src/widgets/order_book_total_indicator_manager.dart';
+
 import 'package:visiblity_manager/visiblity_manager.dart';
 
 class OrderBookStaircaseWidget extends StatefulWidget {
@@ -71,7 +71,7 @@ class _OrderBookStaircaseWidgetState extends State<OrderBookStaircaseWidget> {
           .calculate(visiblyStore.getVisibleKeys());
       if (staircaseData != null) store.update(staircaseData);
       Future.delayed(Duration.zero, () async {
-        setState(() {});
+        if(mounted) setState(() {});
       });
     }
   }

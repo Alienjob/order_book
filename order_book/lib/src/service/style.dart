@@ -9,7 +9,7 @@ class OrderBookStyle {
   static const TextStyle txtTileWhite = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: Colors.white,
+    color: Colors.black,
   );
   static const TextStyle txtHeader = TextStyle(
     fontSize: 15,
@@ -19,7 +19,7 @@ class OrderBookStyle {
   static const TextStyle txtCurrentPricePrimary = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: Colors.white,
+    color: Colors.black,
   );  
   static const TextStyle txtCurrentPriceAdditional = TextStyle(
     fontSize: 12,

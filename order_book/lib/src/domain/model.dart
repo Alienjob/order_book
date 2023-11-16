@@ -79,6 +79,9 @@ class OrderBookData {
     required this.bidPriceQuantity,
     required this.timeStamp,
   });
+
+  OrderBookData.empty():askPriceTime= {}, askPriceQuantity= {}, bidPriceTime= {}, bidPriceQuantity= {}, timeStamp= DateTime(2000);
+  
 }
 
 class OrderBookTileData {

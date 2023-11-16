@@ -1,21 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 
-import 'package:decimal/decimal.dart';
 import 'package:order_book/src/domain/model.dart';
 import 'package:order_book/src/domain/order_book.dart';
-import 'package:order_book/src/domain/order_book_entity_set.dart';
 import 'package:order_book/src/domain/order_book_view.dart';
-import 'package:order_book/src/entities/buy_sell.dart';
 import 'package:order_book/src/entities/market_price_entity.dart';
 import 'package:order_book/src/entities/order_book_change_entity.dart';
 import 'package:order_book/src/entities/order_book_change_response.dart';
-import 'package:order_book/src/entities/order_book_entity.dart';
 import 'package:order_book/src/entities/socket_responce.dart';
 import 'package:order_book/src/service/style.dart';
-
-
 
 class IOrderBookRepository {
   final MarketPriceEntity? market;
@@ -67,7 +59,7 @@ class IOrderBookRepository {
   OrderBookRound? round;
 
 
-  late OrderBook orderBook;
+  OrderBook orderBook = OrderBook(OrderBookData.empty());
   late OrderBookView orderBookView;
 
   StreamSubscription<SocketResponse>? socketListener;

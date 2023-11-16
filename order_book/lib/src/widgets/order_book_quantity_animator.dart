@@ -14,37 +14,27 @@ class OrderBookQuantityAnimator extends StatefulWidget {
 
 class _OrderBookQuantityAnimatorState extends State<OrderBookQuantityAnimator>
     with TickerProviderStateMixin {
-  late int _flexDataPrev;
-  late int _flexData;
+  double _widthPrev = 0;
+  double _width = 0;
 
-  late int _flexTransparentPrev;
-  late int _flexTransparent;
-
-  late Animation<double> _animationData;
-  late Animation<double> _animationTransparent;
-  late Tween<double> _tweenData;
-  late Tween<double> _tweenTransparent;
+  late Animation<double> _animationWidth;
+  late Tween<double> _tweenWidth;
   late AnimationController _animationController;
 
   @override
   void initState() {
-    _flexData = widget.child.flexData;
-    _flexDataPrev = 0;
-    _flexTransparent = widget.child.flexTransparent;
-    _flexTransparentPrev = 100;
+    _width = widget.child.width;
+    _widthPrev = widget.child.width;
 
-    _animationController =
-        AnimationController(duration: OrderBookStyle.indicatorAnimationDuration, vsync: this);
-    _tweenData = Tween(begin: 0.0, end: _flexData.toDouble());
-    _tweenTransparent = Tween(begin: 0.0, end: _flexData.toDouble());
-    _animationData = _tweenData.animate(_animationController)
+    _animationController = AnimationController(
+        duration: OrderBookStyle.indicatorAnimationDuration, vsync: this);
+    _tweenWidth = Tween(begin: 0.0, end: _width);
+    _animationWidth = _tweenWidth.animate(_animationController)
       ..addListener(() {
-        setState(() {});
+        if (mounted) setState(() {});
       });
-    _animationTransparent = _tweenTransparent.animate(_animationController)
-      ..addListener(() {
-        setState(() {});
-      });
+    setNewPosition();
+
     super.initState();
   }
 
@@ -55,29 +45,23 @@ class _OrderBookQuantityAnimatorState extends State<OrderBookQuantityAnimator>
   }
 
   void setNewPosition() {
-    _tweenData.begin = _tweenData.end;
-    _tweenTransparent.begin = _tweenTransparent.end;
+    _tweenWidth.begin = _widthPrev;
+    _tweenWidth.end = _width;
     _animationController.reset();
-    _tweenData.end = _flexData.toDouble();
-    _tweenTransparent.end = _flexTransparent.toDouble();
+
     _animationController.forward();
   }
 
   @override
   void didUpdateWidget(OrderBookQuantityAnimator oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if ((_flexData != widget.child.flexData)) {
-      setState(() {
-        _flexDataPrev = _flexData;
-        _flexData = widget.child.flexData;
-      });
-      setNewPosition();
-    }
-    if (_flexTransparent != widget.child.flexTransparent) {
-      setState(() {
-        _flexTransparentPrev = _flexTransparent;
-        _flexTransparent = widget.child.flexTransparent;
-      });
+    if ((_width != widget.child.width)) {
+      if (mounted) {
+        setState(() {
+          _widthPrev = _animationWidth.value;
+          _width = widget.child.width;
+        });
+      }
       setNewPosition();
     }
   }
@@ -86,8 +70,7 @@ class _OrderBookQuantityAnimatorState extends State<OrderBookQuantityAnimator>
   Widget build(BuildContext context) {
     return OrderBookQuantityIndicator(
       aligement: widget.child.aligement,
-      flexData: _animationData.value.round(),
-      flexTransparent: _animationTransparent.value.round(),
+      width: _animationWidth.value,
       indicatorColor: widget.child.indicatorColor,
     );
   }
