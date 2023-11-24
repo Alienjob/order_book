@@ -69,7 +69,7 @@ class MockRepository extends IOrderBookRepository {
     final list = sideAsks
         ? orderBook.data.askPriceQuantity
         : orderBook.data.bidPriceQuantity;
-    final isNewPrice = (_rand.nextInt(5) >= list.length);
+    final isNewPrice = (_rand.nextInt(100) >= list.length);
     Decimal price;
     late final Decimal quantity;
     final Decimal delta =

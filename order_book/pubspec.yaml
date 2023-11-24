@@ -20,8 +20,7 @@ dependencies:
   declarative_animated_list: ^0.2.0
   either_dart: ^1.0.0
   freezed: ^2.4.5
-  visiblity_manager:
-    path: /Users/airm1/work/visiblity_manager/visiblity_manager
+  visiblity_data_manager: ^0.1.0
 
 dev_dependencies:
   flutter_test:

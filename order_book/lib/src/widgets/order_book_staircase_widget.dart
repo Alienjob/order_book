@@ -5,7 +5,7 @@ import 'package:order_book/src/service/staircase_data_store.dart';
 import 'package:order_book/src/service/style.dart';
 import 'package:order_book/src/widgets/order_book_staircase_animator.dart';
 
-import 'package:visiblity_manager/visiblity_manager.dart';
+import 'package:visiblity_data_manager/visiblity_data_manager.dart';
 
 class OrderBookStaircaseWidget extends StatefulWidget {
   OrderBookStaircaseWidget({

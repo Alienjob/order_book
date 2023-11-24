@@ -36,7 +36,7 @@ class OrderBookStyle {
   static Color askInactive = askColor.withOpacity(0.30); 
 
   static const updateFrequency = Duration(milliseconds: 300);
-  static const mockGenerateFrequency = Duration(milliseconds: 300);
+  static const mockGenerateFrequency = Duration(milliseconds: 30);
   static const mockDeleteLimit = 50;
   static const indicatorAnimationDuration = Duration(milliseconds: 200);
   static const insertAnimationDuration = Duration(milliseconds: 300);
