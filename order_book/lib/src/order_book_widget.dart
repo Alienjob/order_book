@@ -19,7 +19,7 @@ class OrderBookWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OrderBookBlocWrapper(
-      market: market??MarketPriceEntity(),
+      market: market??repository.defaultMarket,
       repository: repository,
       child: OrderBookRootWidget(configuration : configuration),
     );

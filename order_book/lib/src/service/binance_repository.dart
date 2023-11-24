@@ -6,6 +6,7 @@ import 'package:order_book/src/domain/model.dart';
 import 'package:order_book/src/domain/order_book.dart';
 import 'package:order_book/src/domain/order_book_entity_set.dart';
 import 'package:order_book/src/domain/order_book_view.dart';
+import 'package:order_book/src/entities/market_price_entity.dart';
 import 'package:order_book/src/service/binance_api.dart';
 import 'package:order_book/src/service/order_book_repository.dart';
 
@@ -66,4 +67,10 @@ class BinanceRepository extends IOrderBookRepository {
     Map<String, int> data = {"marketId": market?.id??0};
     api.send(jsonEncode(data));
   }
+
+  @override
+  MarketPriceEntity get defaultMarket => MarketPriceEntity(
+      id: 1,
+      name: 'ETHBTC',
+    );
 }

@@ -10,6 +10,8 @@ import 'package:order_book/src/entities/socket_responce.dart';
 import 'package:order_book/src/service/style.dart';
 
 class IOrderBookRepository {
+
+  MarketPriceEntity get defaultMarket => MarketPriceEntity();
   final MarketPriceEntity? market;
 
   IOrderBookRepository({this.market});

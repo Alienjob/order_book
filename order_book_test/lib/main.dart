@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:order_book/order_book.dart';
+import 'package:order_book_test/pages/binance_page.dart';
+import 'package:order_book_test/pages/mock_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,15 +17,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'binanse connect'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -34,11 +33,10 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _useMock = true;
   @override
   Widget build(BuildContext context) {
-    const configuration = OrderBookPresentationConfiguration.horizontal;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(_useMock?'Mock repository':'Binance repository'),
         actions: [
           Switch(
             value: _useMock,
@@ -48,25 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: OrderBookWidget(
-                configuration: configuration,
-                 repository: MockRepository(),
-               ),
-          ),
-        ],
-      )
-      // _useMock
-      //     ? OrderBookWidget(
-      //         configuration: configuration,
-      //         repository: MockRepository(),
-      //       )
-      //     : OrderBookWidget(
-      //         configuration: configuration,
-      //         repository: BinanceRepository(),
-      //       ),
+      body: _useMock ? const MockPage() : const BinancePage(),
     );
   }
 }
