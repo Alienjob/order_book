@@ -63,8 +63,12 @@ class OrderBookView {
       final changeStore = (change.side == BuySell.buy)
           ? viewData.bidPriceTime
           : viewData.askPriceTime;
+      final updateStore = (change.side == BuySell.buy)
+          ? viewData.bidPriceUpdateTime
+          : viewData.askPriceUpdateTime;
       store[rounded] = (store[rounded] ?? Decimal.zero) + delta;
       changeStore[rounded] = change.timestamp ?? 0;
+      updateStore[rounded] = DateTime.now();
 
       if (store[rounded] == Decimal.zero) store.remove(rounded);
     }
