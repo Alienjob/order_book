@@ -14,12 +14,14 @@ class OrderBookView {
   double? _priceChange;
 
   OrderBookView(this.orderBook, this.round) {
-    DateTime timeStamp = orderBook.data.timeStamp;
+    int timeStamp = orderBook.data.timeStamp;
 
     Map<Decimal, Decimal> askPriceQuantity = {};
     Map<Decimal, Decimal> bidPriceQuantity = {};
-    Map<Decimal, DateTime> askPriceTime = {};
-    Map<Decimal, DateTime> bidPriceTime = {};
+    Map<Decimal, int> askPriceTime = {};
+    Map<Decimal, int> bidPriceTime = {};    
+    Map<Decimal, DateTime> askPriceUpdateTime = {};
+    Map<Decimal, DateTime> bidPriceUpdateTime = {};
 
     for (final price in orderBook.data.askPriceQuantity.keys) {
       final rounded = _doRound(price);
@@ -27,6 +29,7 @@ class OrderBookView {
       askPriceQuantity[rounded] =
           (askPriceQuantity[rounded] ?? Decimal.zero) + quantity;
       askPriceTime[rounded] = timeStamp;
+      askPriceUpdateTime[rounded] = DateTime.now();
     }
     for (final price in orderBook.data.bidPriceQuantity.keys) {
       final rounded = _doRound(price);
@@ -34,6 +37,7 @@ class OrderBookView {
       bidPriceQuantity[rounded] =
           (bidPriceQuantity[rounded] ?? Decimal.zero) + quantity;
       bidPriceTime[rounded] = timeStamp;
+      bidPriceUpdateTime[rounded] = DateTime.now();
     }
 
     viewData = OrderBookData(
@@ -41,7 +45,10 @@ class OrderBookView {
         askPriceTime: askPriceTime,
         bidPriceTime: bidPriceTime,
         askPriceQuantity: askPriceQuantity,
-        bidPriceQuantity: bidPriceQuantity);
+        bidPriceQuantity: bidPriceQuantity,
+        askPriceUpdateTime: askPriceUpdateTime,
+        bidPriceUpdateTime: bidPriceUpdateTime,
+        );
   }
 
   void update(OrderBookChangeEntity change) {
@@ -57,7 +64,7 @@ class OrderBookView {
           ? viewData.bidPriceTime
           : viewData.askPriceTime;
       store[rounded] = (store[rounded] ?? Decimal.zero) + delta;
-      changeStore[rounded] = change.time ?? DateTime.now();
+      changeStore[rounded] = change.timestamp ?? 0;
 
       if (store[rounded] == Decimal.zero) store.remove(rounded);
     }
@@ -77,7 +84,7 @@ class OrderBookView {
               quantity: viewData.askPriceQuantity[key]?.toDouble() ?? 0,
               total: (key.toDouble()) *
                   (viewData.askPriceQuantity[key]?.toDouble() ?? 0),
-              updateTime: viewData.askPriceTime[key]!,
+              updateTime: viewData.askPriceUpdateTime[key]??DateTime.now(),
             ))
         .toList();
     List<OrderBookTileData> bids = viewData.bidPriceQuantity.keys
@@ -86,7 +93,7 @@ class OrderBookView {
               quantity: viewData.bidPriceQuantity[key]?.toDouble() ?? 0,
               total: (key.toDouble()) *
                   (viewData.bidPriceQuantity[key]?.toDouble() ?? 0),
-              updateTime: viewData.bidPriceTime[key]!,
+              updateTime: viewData.bidPriceUpdateTime[key]??DateTime.now(),
             ))
         .toList();
 

@@ -16,14 +16,14 @@ class OrderBookResponse {
   String? name;
   List<OrderBookAskBidResponse>? asks;
   List<OrderBookAskBidResponse>? bids;
-  String? time;
+  int? timestamp;
   int? total;
 
   OrderBookResponse({
     this.name, 
     this.asks, 
     this.bids, 
-    this.time, 
+    this.timestamp, 
     this.total, 
     });
 

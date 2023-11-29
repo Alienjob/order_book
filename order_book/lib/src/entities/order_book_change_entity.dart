@@ -24,8 +24,6 @@ class OrderBookChangeEntity {
 
   bool? add;
 
-  DateTime? time;
-
   int? timestamp;
 
   OrderBookChangeEntity({
@@ -36,13 +34,11 @@ class OrderBookChangeEntity {
     this.price,
     this.count,
     this.add,
-    this.time,
     this.timestamp,
   });
 
   factory OrderBookChangeEntity.fromResponse(
           {required OrderBookChangeResponse response,
-          required DateTime? time,
           required int? timestamp}) =>
       OrderBookChangeEntity(
         id: response.id,
@@ -53,7 +49,6 @@ class OrderBookChangeEntity {
         price: Decimal.tryParse('${response.price}'),
         count: response.count,
         add: response.add,
-        time: time,
         timestamp: timestamp,
       );
   factory OrderBookChangeEntity.fromJson(Map<String, dynamic> json) =>

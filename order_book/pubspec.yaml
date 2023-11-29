@@ -23,6 +23,7 @@ dependencies:
   retrofit: '>=4.0.0 <5.0.0'
   logger: any
   dio: ^5.3.4
+  web_socket_channel: ^2.4.0
 
 dev_dependencies:
   flutter_test:

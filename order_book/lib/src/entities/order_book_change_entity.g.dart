@@ -20,8 +20,6 @@ OrderBookChangeEntity _$OrderBookChangeEntityFromJson(
           : Decimal.fromJson(json['price'] as String),
       count: json['count'] as int?,
       add: json['add'] as bool?,
-      time:
-          json['time'] == null ? null : DateTime.parse(json['time'] as String),
       timestamp: json['timestamp'] as int?,
     );
 
@@ -35,7 +33,6 @@ Map<String, dynamic> _$OrderBookChangeEntityToJson(
       'price': OrderBookChangeEntity._decimalToJson(instance.price),
       'count': instance.count,
       'add': instance.add,
-      'time': instance.time?.toIso8601String(),
       'timestamp': instance.timestamp,
     };
 

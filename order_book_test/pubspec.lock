@@ -145,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: "01870acd87986f768e0c09cc4d7a19a59d814af7b34cbeb0b437d2c33bdfea4c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.4"
   either_dart:
     dependency: transitive
     description:
@@ -219,6 +227,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      sha256: "2aa08ce0341cc9b354a498388e30986515406668dbcc4f7c950c3e715496693b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.2"
   json_annotation:
     dependency: transitive
     description:
@@ -235,6 +251,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: "6bbb9d6f7056729537a4309bda2e74e18e5d9f14302489cc1e93f33b3fe32cac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2+1"
   logging:
     dependency: transitive
     description:
@@ -330,6 +354,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  retrofit:
+    dependency: transitive
+    description:
+      name: retrofit
+      sha256: "04ed77c82cadb655bb9357e8d0cb9da72ff704749a2d0cfe6540dd1f1f7ca4b9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -447,6 +479,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.4-beta"
+  web_socket_channel:
+    dependency: transitive
+    description:
+      name: web_socket_channel
+      sha256: d88238e5eac9a42bb43ca4e721edba3c08c6354d4a53063afaa568516217621b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   yaml:
     dependency: transitive
     description:

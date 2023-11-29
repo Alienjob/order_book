@@ -10,7 +10,6 @@ import 'package:order_book/src/entities/socket_responce.dart';
 import 'package:order_book/src/service/style.dart';
 
 class IOrderBookRepository {
-
   MarketPriceEntity get defaultMarket => MarketPriceEntity();
   final MarketPriceEntity? market;
 
@@ -60,7 +59,6 @@ class IOrderBookRepository {
 
   OrderBookRound? round;
 
-
   OrderBook orderBook = OrderBook(OrderBookData.empty());
   late OrderBookView orderBookView;
 
@@ -82,19 +80,20 @@ class IOrderBookRepository {
     });
   }
 
+  List<OrderBookChangeEntity> parseChangeResponse(SocketResponse response) {
+    throw UnimplementedError();
+  }
+
   Future<void> socketListenerHandler(SocketResponse response) async {
     if (response.isStart) {
       await loadSnapshot();
     } else {
-      final orderBookChangeResponse =
-          OrderBookChangeResponse.fromJson(response.data!);
-      final orderBookChangedEntity = OrderBookChangeEntity.fromResponse(
-        response: orderBookChangeResponse,
-        time: response.time,
-        timestamp: response.timestamp,
-      );
+      final orderBookChangedEntitys = parseChangeResponse(response);
 
-      _manageOrderBookChangedEntity(orderBookChangedEntity);
+
+      for (var e in orderBookChangedEntitys) {
+        _manageOrderBookChangedEntity(e);
+      }
     }
   }
 
@@ -117,10 +116,11 @@ class IOrderBookRepository {
 
   // прочее
 
-  void startLoadSnapshot(){
+  void startLoadSnapshot() {
     _bookFreezed = true;
   }
-  void finishLoadSnapshot(){
+
+  void finishLoadSnapshot() {
     _bookFreezed = false;
     _refresh();
   }
@@ -145,4 +145,3 @@ class IOrderBookRepository {
     return orderBookView.get();
   }
 }
-

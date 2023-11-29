@@ -9,6 +9,7 @@ import 'package:order_book/src/domain/order_book_view.dart';
 import 'package:order_book/src/entities/buy_sell.dart';
 import 'package:order_book/src/entities/market_price_entity.dart';
 import 'package:order_book/src/entities/order_book_change_entity.dart';
+import 'package:order_book/src/entities/order_book_change_response.dart';
 import 'package:order_book/src/entities/order_book_entity.dart';
 import 'package:order_book/src/entities/socket_responce.dart';
 import 'package:order_book/src/service/order_book_repository.dart';
@@ -51,6 +52,16 @@ class MockRepository extends IOrderBookRepository {
   }
 
   @override
+  List<OrderBookChangeEntity> parseChangeResponse(SocketResponse response) {
+    return [
+      OrderBookChangeEntity.fromResponse(
+        response: OrderBookChangeResponse.fromJson(response.data!),
+        timestamp: response.timestamp,
+      )
+    ];
+  }
+
+  @override
   void subscribeToMarket() {
     _mockSocketTimer?.cancel();
     _mockSocketTimer = null;
@@ -58,7 +69,6 @@ class MockRepository extends IOrderBookRepository {
     _mockSocketTimer =
         Timer.periodic(OrderBookStyle.mockGenerateFrequency, (timer) {
       mockStreamController.add(SocketResponse(
-          time: DateTime.now(),
           timestamp: DateTime.now().millisecondsSinceEpoch,
           data: _randomChange().toJson()));
     });
@@ -101,7 +111,7 @@ class MockRepository extends IOrderBookRepository {
         amount: quantity.round(scale: 5),
         side: sideAsks ? BuySell.sell : BuySell.buy,
         count: 1,
-        time: DateTime.now());
+        timestamp: DateTime.now().microsecondsSinceEpoch);
   }
 
   Decimal _randomPriceFromMap(Map<Decimal, Decimal> list) {
@@ -114,7 +124,7 @@ class MockRepository extends IOrderBookRepository {
       name: 'mock',
       asks: [],
       bids: [],
-      time: DateTime.now(),
+      timestamp: DateTime.now().microsecondsSinceEpoch,
     );
     return data;
   }

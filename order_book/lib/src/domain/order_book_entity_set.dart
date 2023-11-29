@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:decimal/decimal.dart';
@@ -15,12 +16,14 @@ class OrderBookEntitySet {
   // по времени с учетом наложений
   // и выдает результирующую книгу
   OrderBookData makeBookData() {
-    DateTime makeTime = DateTime.parse("2000-01-01");
+    int makeTime = 0;
 
-    Map<Decimal, DateTime> askPriceTime = {};
+    Map<Decimal, int> askPriceTime = {};
     Map<Decimal, Decimal> askPriceQuantity = {};
-    Map<Decimal, DateTime> bidPriceTime = {};
+    Map<Decimal, int> bidPriceTime = {};
     Map<Decimal, Decimal> bidPriceQuantity = {};
+    Map<Decimal, DateTime> askPriceUpdateTime = {};
+    Map<Decimal, DateTime> bidPriceUpdateTime = {};
 
     final timeEntities = _getTimeEntities();
     final timeEntitiesKeys = timeEntities.keys.sorted((a, b) => a.compareTo(b));
@@ -29,7 +32,7 @@ class OrderBookEntitySet {
           time, timeEntities[time]?.asks ?? [], askPriceTime, askPriceQuantity);
       _updateFromEntity(
           time, timeEntities[time]?.bids ?? [], bidPriceTime, bidPriceQuantity);
-      makeTime = _maxT(time, makeTime);
+      makeTime = max(time, makeTime);
     }
 
     final timeChanges = _getTimeChanges();
@@ -37,32 +40,33 @@ class OrderBookEntitySet {
     for (final time in timeChangesKeys) {
       final change = timeChanges[time]!;
       if (change.side == BuySell.buy) {
-        _updateFromChange(time, change, bidPriceTime, bidPriceQuantity);
+        _updateFromChange(time, change, bidPriceTime, bidPriceUpdateTime, bidPriceQuantity);
       } else {
-        _updateFromChange(time, change, askPriceTime, askPriceQuantity);
+        _updateFromChange(time, change, askPriceTime, askPriceUpdateTime, askPriceQuantity);
       }
-      makeTime = _maxT(time, makeTime);
+      makeTime = max(time, makeTime);
     }
 
     return OrderBookData(
-
       timeStamp: makeTime,
       askPriceQuantity: askPriceQuantity,
       bidPriceQuantity: bidPriceQuantity,
       askPriceTime: askPriceTime,
       bidPriceTime: bidPriceTime,
+      askPriceUpdateTime: askPriceUpdateTime,
+      bidPriceUpdateTime: bidPriceUpdateTime,
     );
   }
 
   void _updateFromEntity(
-    DateTime time,
+    int time,
     List<OrderBookAskBidEntity> list,
-    Map<Decimal, DateTime> priceTime,
+    Map<Decimal, int> priceTime,
     Map<Decimal, Decimal> priceQuantity,
   ) {
     for (final askBidEntity in list) {
       Decimal price = askBidPrice(askBidEntity);
-      if ((priceTime[price] == null) || (priceTime[price]!.isBefore(time))) {
+      if ((priceTime[price] == null) || (priceTime[price]! < (time))) {
         priceTime[price] = time;
         priceQuantity[price] = askBidQuantity(askBidEntity);
       }
@@ -70,47 +74,46 @@ class OrderBookEntitySet {
   }
 
   void _updateFromChange(
-    DateTime time,
+    int time,
     OrderBookChangeEntity change,
-    Map<Decimal, DateTime> priceTime,
+    Map<Decimal, int> priceTime,    
+    Map<Decimal, DateTime> updateTime,
     Map<Decimal, Decimal> priceQuantity,
   ) {
     Decimal price = changePrice(change);
-    if ((priceTime[price] == null) || (priceTime[price]!.isBefore(time))) {
+    if ((priceTime[price] == null) || (priceTime[price]! < (time))) {
       priceTime[price] = time;
       priceQuantity[price] = changeQuantity(change);
+      updateTime[price] = DateTime.now();
     }
   }
 
-  Map<DateTime, OrderBookEntity> _getTimeEntities() {
-    Map<DateTime, OrderBookEntity> result = {};
+  Map<int, OrderBookEntity> _getTimeEntities() {
+    Map<int, OrderBookEntity> result = {};
 
     for (final entity in entities) {
-      DateTime time = entity.time??DateTime.now();
-      while (result[time] != null) {
-        time = time.add(const Duration(microseconds: 1));
+      int timestamp = entity.timestamp ?? 0;
+      while (result[timestamp] != null) {
+        timestamp = timestamp + 1;
       }
-      result[time] = entity;
+      result[timestamp] = entity;
     }
 
     return result;
   }
 
-  Map<DateTime, OrderBookChangeEntity> _getTimeChanges() {
-    Map<DateTime, OrderBookChangeEntity> result = {};
+  Map<int, OrderBookChangeEntity> _getTimeChanges() {
+    Map<int, OrderBookChangeEntity> result = {};
 
     for (final change in changes) {
-      DateTime time = change.time??DateTime.now();
-      while (result[time] != null) {
-        time = time.add(const Duration(microseconds: 1));
+      int timestamp = change.timestamp ?? 0;
+      while (result[timestamp] != null) {
+        timestamp = timestamp + 1;
       }
-      result[time] = change;
+      result[timestamp] = change;
     }
 
     return result;
   }
 }
 
-DateTime _maxT(DateTime a, DateTime b) {
-  return (a.isAfter(b)) ? a : b;
-}

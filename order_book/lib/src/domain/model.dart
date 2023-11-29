@@ -2,7 +2,6 @@ import 'package:order_book/src/entities/order_book_askbid_entity.dart';
 import 'package:order_book/src/entities/order_book_change_entity.dart';
 import 'package:uuid/uuid.dart';
 import 'package:decimal/decimal.dart';
-import 'dart:collection';
 
 
 enum OrderBookCrossAxisAlignment { left, right }
@@ -65,12 +64,14 @@ Decimal askBidQuantity(OrderBookAskBidEntity askBid) =>
     Decimal.tryParse('${askBid.quantity!}') ?? Decimal.zero;
 
 class OrderBookData {
-  DateTime timeStamp;
+  int timeStamp = 0;
 
-  final Map<Decimal, DateTime> askPriceTime;
+  final Map<Decimal, int> askPriceTime;
   final Map<Decimal, Decimal> askPriceQuantity;
-  final Map<Decimal, DateTime> bidPriceTime;
+  final Map<Decimal, int> bidPriceTime;
   final Map<Decimal, Decimal> bidPriceQuantity;
+  final Map<Decimal, DateTime> askPriceUpdateTime;
+  final Map<Decimal, DateTime> bidPriceUpdateTime;
 
   OrderBookData({
     required this.askPriceTime,
@@ -78,9 +79,11 @@ class OrderBookData {
     required this.bidPriceTime,
     required this.bidPriceQuantity,
     required this.timeStamp,
+    required this.askPriceUpdateTime,
+    required this.bidPriceUpdateTime,
   });
 
-  OrderBookData.empty():askPriceTime= {}, askPriceQuantity= {}, bidPriceTime= {}, bidPriceQuantity= {}, timeStamp= DateTime(2000);
+  OrderBookData.empty():askPriceTime= {}, askPriceQuantity= {}, bidPriceTime= {},  askPriceUpdateTime= {},  bidPriceUpdateTime= {}, bidPriceQuantity= {}, timeStamp= 0;
   
 }
 

@@ -12,7 +12,7 @@ class OrderBook {
   // возвращает изменение объема,
   // чтобы вью могла обновить суммировнную запись
   Decimal update(OrderBookChangeEntity change) {
-    DateTime timestamp = change.time ?? DateTime.now();
+    int timestamp = change.timestamp ?? 0;
 
     Decimal price = changePrice(change);
     Decimal quantity = changeQuantity(change);
@@ -25,7 +25,7 @@ class OrderBook {
     final timeStore =
         (change.side == BuySell.buy) ? data.bidPriceTime : data.askPriceTime;
 
-    if ((timeStore[price] == null) || (timeStore[price]!.isBefore(timestamp))) {
+    if ((timeStore[price] == null) || (timeStore[price]! < (timestamp))) {
       final result = quantity - (quantityStore[price] ?? Decimal.zero);
       if (quantity == Decimal.zero) {
         quantityStore.remove(price);
