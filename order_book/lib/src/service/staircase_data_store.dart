@@ -27,7 +27,7 @@ class StaircaseDataStore
     double maxTotal = 0;
     double minTotal = 0;
     for (var key in keys) {
-      double total = registred[key]?.total.floorToDouble() ?? 0;
+      double total = registred[key]?.total ?? 0;
       maxTotal = max(maxTotal, total);
       minTotal = min(minTotal, total);
     }
