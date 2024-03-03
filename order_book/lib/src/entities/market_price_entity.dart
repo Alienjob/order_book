@@ -1,6 +1,5 @@
 
-import 'package:order_book/src/entities/currency_entity.dart';
-import 'package:order_book/src/entities/currency_type.dart';
+import 'package:order_book/src/entities/currency.dart';
 import 'package:order_book/src/entities/derived_currency_list_response.dart';
 import 'package:order_book/src/entities/market_response.dart';
 import 'package:order_book/src/entities/markets_response.dart';
@@ -11,8 +10,8 @@ class MarketPriceEntity {
   int? id;
   String? name;
 
-  CurrencyEntity? fromCurrency;
-  CurrencyEntity? toCurrency;
+  Currency? fromCurrency;
+  Currency? toCurrency;
 
   double? highPrice;
   double? lowPrice;
@@ -55,8 +54,7 @@ class MarketPriceEntity {
   }
 
   static List<MarketPriceEntity> _fromMarketResponse(MarketResponse response) {
-    final from = CurrencyEntity(
-      type: _getCurrencyType(response.type),
+    final from = Currency(
       id: response.currencyId,
       name: response.currencyName,
       decimals: response.decimals,
@@ -67,8 +65,7 @@ class MarketPriceEntity {
 
     for (var derivedCurrency
         in response.derivedCurrencyList as List<DerivedCurrencyListResponse>) {
-      final to = CurrencyEntity(
-        type: _getCurrencyType(derivedCurrency.type),
+      final to = Currency(
         id: derivedCurrency.derivedCurrencyId,
         name: derivedCurrency.derivedCurrencyName,
         decimals: derivedCurrency.decimals,
@@ -97,8 +94,8 @@ class MarketPriceEntity {
   MarketPriceEntity copyWith({
     int? id,
     String? name,
-    CurrencyEntity? fromCurrency,
-    CurrencyEntity? toCurrency,
+    Currency? fromCurrency,
+    Currency? toCurrency,
     double? highPrice,
     double? lowPrice,
     double? price,
@@ -128,18 +125,8 @@ class MarketPriceEntity {
     );
   }
 
-  static CurrencyType _getCurrencyType(int? type) {
-    switch (type) {
-      case 0:
-        return CurrencyType.fiat;
-
-      default:
-        return CurrencyType.crypto;
-    }
-  }
-
   static String _makeName(
-      CurrencyEntity fromCurrency, CurrencyEntity toCurrency) {
+      Currency fromCurrency, Currency toCurrency) {
     return '${fromCurrency.name}/${toCurrency.name}';
   }
 }

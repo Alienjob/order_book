@@ -16,12 +16,12 @@ part 'order_book_event.dart';
 part 'order_book_bloc.freezed.dart';
 
 class OrderBookBloc extends Bloc<OrderBookEvent, OrderBookState> {
-  MarketPriceEntity? market;
+  MarketPriceEntity market;
   final IOrderBookRepository repository;
 
   StreamSubscription<OrderBookViewData>? _listener;
 
-  OrderBookBloc({required this.repository, this.market})
+  OrderBookBloc({required this.repository, required this.market})
       : super(OrderBookState()) {
     on<Init>(_init);
     on<DataRecieved>(_dataRecieved);
@@ -40,7 +40,7 @@ class OrderBookBloc extends Bloc<OrderBookEvent, OrderBookState> {
             section: OrderBookPresentationSection.both,
             round: OrderBookRound.x001,
             listening: true)));
-    await repository.init();
+    await repository.init(market: market);
     repository.setRound(OrderBookRound.x001);
     _connectRepository(emit);
   }
@@ -82,7 +82,7 @@ class OrderBookBloc extends Bloc<OrderBookEvent, OrderBookState> {
       add(OrderBookEvent.dataRecieved(data: response));
     });
 
-    repository.init();
+    repository.init(market: market);
   }
 
   @override

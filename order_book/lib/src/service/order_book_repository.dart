@@ -5,15 +5,14 @@ import 'package:order_book/src/domain/order_book.dart';
 import 'package:order_book/src/domain/order_book_view.dart';
 import 'package:order_book/src/entities/market_price_entity.dart';
 import 'package:order_book/src/entities/order_book_change_entity.dart';
-import 'package:order_book/src/entities/order_book_change_response.dart';
 import 'package:order_book/src/entities/socket_responce.dart';
 import 'package:order_book/src/service/style.dart';
 
 class IOrderBookRepository {
   MarketPriceEntity get defaultMarket => MarketPriceEntity();
-  final MarketPriceEntity? market;
+  late MarketPriceEntity market;
 
-  IOrderBookRepository({this.market});
+  IOrderBookRepository();
 
   Future<void> loadSnapshot() {
     throw 'You need to override this method';
@@ -23,13 +22,13 @@ class IOrderBookRepository {
     throw 'You need to override this method';
   }
 
-  Future<void> init() {
-    throw 'You need to override this method';
+  Future<void> init({required MarketPriceEntity market}) async {
+    this.market = market;
   }
 
   Future<void> setRound(OrderBookRound? round) async {
     if (!ready) {
-      await init();
+      await init(market: market);
     }
 
     round = round;
@@ -39,7 +38,7 @@ class IOrderBookRepository {
 
   Future<void> setListening(bool listening) async {
     if (listening) {
-      await init();
+      await init(market: market);
     } else {
       dispose();
     }

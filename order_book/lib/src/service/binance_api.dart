@@ -3,12 +3,14 @@ import 'dart:convert';
 
 import 'package:either_dart/either.dart';
 import 'package:order_book/src/entities/binance_depth_response.dart';
+import 'package:order_book/src/entities/binance_exchange_info_response.dart';
 import 'package:order_book/src/entities/order_book_askbid_response.dart';
 import 'package:order_book/src/entities/order_book_entity.dart';
 import 'package:order_book/src/entities/order_book_response.dart';
 import 'package:order_book/src/entities/socket_responce.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -20,7 +22,16 @@ part 'binance_api.g.dart';
 class BinanceApi {
   WebSocketChannel? _channel;
   final restClient = BinanceRestClient(Dio());
+  
+  BiniaceExangeInfoResponse? exchangeInfo;
+
   BinanceApi();
+
+  Future<void> init() async {
+    exchangeInfo =  BiniaceExangeInfoResponse.fromJson(jsonDecode(
+      await rootBundle.loadString("assets/binance_exchange_info.json")
+    ));
+  }
 
   void openDepth({required String symbol}) {
     final socketUrl = 'wss://stream.binance.com:9443/ws/$symbol@depth';
@@ -38,8 +49,6 @@ class BinanceApi {
   void close() {
     _channel?.sink.close(status.goingAway);
   }
-
-  void send(String message) {}
 
   final StreamController<SocketResponse> _controller =
       StreamController<SocketResponse>();
@@ -66,6 +75,8 @@ class BinanceApi {
     }
     
   }
+
+
 }
 
 
@@ -74,6 +85,6 @@ class BinanceApi {
 abstract class BinanceRestClient {
   factory BinanceRestClient(Dio dio, {String baseUrl}) = _BinanceRestClient;
 
-  @GET('depth?symbol={symbol}&limit=1000')
+  @GET('depth?symbol={symbol}&limit=10')
   Future<BiniaceDepthResponse> getDepth(@Path('symbol') String symbol);
 }

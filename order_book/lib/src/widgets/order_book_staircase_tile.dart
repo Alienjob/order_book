@@ -83,10 +83,10 @@ class OrderBookStaircaseTile extends StatelessWidget {
                         TilePrice(
                             price: data.price.toDouble(), color: _priceColor()),
                         const Spacer(),
-                        TileQuantity(quantity: data.total.roundToDouble())
+                        TileQuantity(quantity: (data.total*10000).roundToDouble()/10000)
                       ])
                     : ([
-                        TileQuantity(quantity: data.total.roundToDouble()),
+                        TileQuantity(quantity: (data.total*10000).roundToDouble()/10000),
                         const Spacer(),
                         TilePrice(
                             price: data.price.toDouble(), color: _priceColor())

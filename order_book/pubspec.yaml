@@ -35,4 +35,5 @@ dev_dependencies:
 
 flutter:
 
-
+assets:
+    - assets/data

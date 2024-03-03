@@ -1,6 +1,5 @@
 
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:decimal/decimal.dart';
 import 'package:order_book/src/domain/model.dart';
@@ -11,24 +10,23 @@ import 'package:order_book/src/entities/binance_change_depth_response.dart';
 import 'package:order_book/src/entities/buy_sell.dart';
 import 'package:order_book/src/entities/market_price_entity.dart';
 import 'package:order_book/src/entities/order_book_change_entity.dart';
-import 'package:order_book/src/entities/order_book_change_response.dart';
 import 'package:order_book/src/entities/socket_responce.dart';
 import 'package:order_book/src/service/binance_api.dart';
 import 'package:order_book/src/service/order_book_repository.dart';
 
-const _symbol = 'bnbbtc';
 class BinanceRepository extends IOrderBookRepository {
 
   final BinanceApi api = BinanceApi();
 
   BinanceRepository() {
     socketListener = api.subject.listen(socketListenerHandler);
-    subscribeToMarket();
     controller = StreamController<OrderBookViewData>();
   }
 
   @override
-  Future<void> init() async {
+  Future<void> init({required MarketPriceEntity market}) async {
+    await super.init(market: market);
+    subscribeToMarket();
     await loadSnapshot();
     initUpdateInterfaceTimer();
     ready = true;
@@ -37,14 +35,15 @@ class BinanceRepository extends IOrderBookRepository {
   @override
   Future<void> loadSnapshot() async {
     
+    int start = DateTime.now().microsecondsSinceEpoch;
     startLoadSnapshot();
-
+  
     late OrderBookEntitySet _entitySet;
     _entitySet = OrderBookEntitySet();
 
     try {
       final result = await api.getOrderBook(
-        symbol: _symbol,
+        symbol: (super.market?.name)!,
 
       );
       result.fold((response) {
@@ -62,13 +61,14 @@ class BinanceRepository extends IOrderBookRepository {
     orderBook = OrderBook(_entitySet.makeBookData());
     orderBookView = OrderBookView(orderBook, round);
 
-
     finishLoadSnapshot();
+    int end = DateTime.now().microsecondsSinceEpoch;
+    print('load snapshot in ${end - start} microseconds');
   }
 
   @override
   void subscribeToMarket() {
-    api.openDepth(symbol: _symbol);
+    api.openDepth(symbol: (super.market.name)!);
   }
 
   @override

@@ -28,7 +28,8 @@ class MockRepository extends IOrderBookRepository {
   }
 
   @override
-  Future<void> init() async {
+  Future<void> init({required MarketPriceEntity market}) async {
+    await super.init(market: market);
     await loadSnapshot();
     initUpdateInterfaceTimer();
     ready = true;
