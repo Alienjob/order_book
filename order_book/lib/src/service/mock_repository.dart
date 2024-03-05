@@ -8,10 +8,12 @@ import 'package:order_book/src/domain/order_book_entity_set.dart';
 import 'package:order_book/src/domain/order_book_view.dart';
 import 'package:order_book/src/entities/buy_sell.dart';
 import 'package:order_book/src/entities/market_price_entity.dart';
+import 'package:order_book/src/entities/order_book_askbid_entity.dart';
 import 'package:order_book/src/entities/order_book_change_entity.dart';
 import 'package:order_book/src/entities/order_book_change_response.dart';
 import 'package:order_book/src/entities/order_book_entity.dart';
 import 'package:order_book/src/entities/socket_responce.dart';
+import 'package:order_book/src/service/mock_exchange.dart';
 import 'package:order_book/src/service/order_book_repository.dart';
 import 'package:order_book/src/service/style.dart';
 
@@ -20,8 +22,8 @@ class MockRepository extends IOrderBookRepository {
   final StreamController<SocketResponse> mockStreamController =
       StreamController<SocketResponse>();
   Timer? _mockSocketTimer;
-
-  MockRepository() {
+  MockExchange _exchange;
+  MockRepository() : _exchange = MockExchange() {
     socketListener = mockStreamController.stream.listen(socketListenerHandler);
     subscribeToMarket();
     controller = StreamController<OrderBookViewData>();
@@ -69,9 +71,16 @@ class MockRepository extends IOrderBookRepository {
 
     _mockSocketTimer =
         Timer.periodic(OrderBookStyle.mockGenerateFrequency, (timer) {
-      mockStreamController.add(SocketResponse(
-          timestamp: DateTime.now().millisecondsSinceEpoch,
-          data: _randomChange().toJson()));
+      final deal = _exchange.getDeal(orderBook);
+      final changes = _exchange.tradeDeal(orderBook, deal);
+      for (var change in changes) {
+        mockStreamController.add(SocketResponse(
+            timestamp: DateTime.now().microsecondsSinceEpoch,
+            data: change.toJson()));
+      }
+      // mockStreamController.add(SocketResponse(
+      //     timestamp: DateTime.now().microsecondsSinceEpoch,
+      //     data: _randomChange().toJson()));
     });
   }
 
@@ -123,8 +132,29 @@ class MockRepository extends IOrderBookRepository {
   OrderBookEntity mock_data() {
     final data = OrderBookEntity(
       name: 'mock',
-      asks: [],
-      bids: [],
+      asks: [
+        OrderBookAskBidEntity(price: Decimal.fromInt(100), quantity: Decimal.fromInt(100)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(90), quantity: Decimal.fromInt(1000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(80), quantity: Decimal.fromInt(10000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(70), quantity: Decimal.fromInt(50000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(60), quantity: Decimal.fromInt(200000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(50), quantity: Decimal.fromInt(500000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(40), quantity: Decimal.fromInt(900000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(30), quantity: Decimal.fromInt(2000000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(20), quantity: Decimal.fromInt(5000000)),
+      ],
+      bids: [
+        OrderBookAskBidEntity(price: Decimal.fromInt(100), quantity: Decimal.fromInt(100)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(120), quantity: Decimal.fromInt(1000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(130), quantity: Decimal.fromInt(10000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(150), quantity: Decimal.fromInt(50000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(190), quantity: Decimal.fromInt(200000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(200), quantity: Decimal.fromInt(500000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(300), quantity: Decimal.fromInt(900000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(400), quantity: Decimal.fromInt(2000000)),
+        OrderBookAskBidEntity(price: Decimal.fromInt(500), quantity: Decimal.fromInt(5000000)),
+
+      ],
       timestamp: DateTime.now().microsecondsSinceEpoch,
     );
     return data;

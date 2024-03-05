@@ -7,7 +7,6 @@ part "order_book_change_entity.g.dart";
 
 @JsonSerializable()
 class OrderBookChangeEntity {
-
   int? id;
 
   int? marketId;
@@ -56,5 +55,26 @@ class OrderBookChangeEntity {
 
   Map<String, dynamic> toJson() => _$OrderBookChangeEntityToJson(this);
 
-  static double _decimalToJson(Decimal? value) => value?.toDouble()??0;
+  static double _decimalToJson(Decimal? value) => value?.toDouble() ?? 0;
+
+  OrderBookChangeEntity copyWith({
+    int? id,
+    int? marketId,
+    BuySell? side,
+    Decimal? amount,
+    Decimal? price,
+    int? count,
+    bool? add,
+    int? timestamp,
+  }) {
+    return OrderBookChangeEntity(
+      id: id ?? this.id,
+      marketId: id ?? this.marketId,
+      side: side ?? this.side,
+      amount: amount ?? this.amount,
+      price: price ?? this.price,
+      count: count ?? this.count,
+      add: add ?? this.add,
+    );
+  }
 }

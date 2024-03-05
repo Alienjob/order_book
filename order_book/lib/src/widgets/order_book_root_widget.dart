@@ -42,7 +42,7 @@ class OrderBookRootWidget extends StatelessWidget {
                     OrderBookStaircaseWidget(
                       type: OrderBookStaircaseType.bid,
                       aligement: OrderBookCrossAxisAlignment.right,
-                      sort: OrderBookMainAxisSort.desc,
+                      sort: OrderBookMainAxisSort.asc,
                       data: bids,
                       configuration: configuration,
                     ),
@@ -50,7 +50,7 @@ class OrderBookRootWidget extends StatelessWidget {
                     OrderBookStaircaseWidget(
                       type: OrderBookStaircaseType.ask,
                       aligement: OrderBookCrossAxisAlignment.left,
-                      sort: OrderBookMainAxisSort.asc,
+                      sort: OrderBookMainAxisSort.desc,
                       data: asks,
                       configuration: configuration,
                     ),

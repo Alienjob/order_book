@@ -53,4 +53,6 @@ extension BuySellExtension on BuySell {
         return 1;
     }
   }
+
+  BuySell get opposite => (this == BuySell.buy) ? BuySell.sell : BuySell.buy;
 }

@@ -101,8 +101,8 @@ class OrderBookView {
             ))
         .toList();
 
-    asks.sort((a, b) => a.price.compareTo(b.price));
-    bids.sort((a, b) => b.price.compareTo(a.price));
+    asks.sort((a, b) => b.price.compareTo(a.price));
+    bids.sort((a, b) => a.price.compareTo(b.price));
 
     double currentPrice = (bids.isNotEmpty) ? bids.first.price : 0;
     if (currentPrice != _previousPrice) {

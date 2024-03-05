@@ -26,8 +26,9 @@ class OrderBook {
         (change.side == BuySell.buy) ? data.bidPriceTime : data.askPriceTime;
 
     if ((timeStore[price] == null) || (timeStore[price]! < (timestamp))) {
-      final result = quantity - (quantityStore[price] ?? Decimal.zero);
+      Decimal result = quantity - (quantityStore[price] ?? Decimal.zero);
       if (quantity == Decimal.zero) {
+        result = -(quantityStore[price] ?? Decimal.zero);
         quantityStore.remove(price);
       } else {
         quantityStore[price] = quantity;
