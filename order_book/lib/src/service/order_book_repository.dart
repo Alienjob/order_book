@@ -1,16 +1,20 @@
 import 'dart:async';
 
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/domain/order_book.dart';
-import 'package:order_book/src/domain/order_book_view.dart';
-import 'package:order_book/src/entities/market_price_entity.dart';
-import 'package:order_book/src/entities/order_book_change_entity.dart';
-import 'package:order_book/src/entities/socket_responce.dart';
-import 'package:order_book/src/service/style.dart';
+import 'package:flutter/material.dart';
+import '../domain/model.dart';
+import '../domain/order_book.dart';
+import '../domain/order_book_view.dart';
+import '../entities/currency.dart';
+import '../entities/market_price_entity.dart';
+import '../entities/order_book_change_entity.dart';
+import '../entities/socket_responce.dart';
+import 'style.dart';
 
 class IOrderBookRepository {
   MarketPriceEntity get defaultMarket => MarketPriceEntity();
   late MarketPriceEntity market;
+  late List<MarketPriceEntity> marketList;
+  late List<Currency> currencyList;
 
   IOrderBookRepository();
 
@@ -125,7 +129,7 @@ class IOrderBookRepository {
   }
 
   handleError(r) {
-    print('OrderBookRepository _handleError $r');
+    debugPrint('OrderBookRepository _handleError $r');
   }
 
   dispose() {

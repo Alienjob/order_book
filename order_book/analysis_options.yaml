@@ -1,4 +1,14 @@
 include: package:flutter_lints/flutter.yaml
 
+# ignore freezed data classes
+analyzer:
+  exclude:
+    - "**/*.freezed.dart"
+
+# Lint rules
+linter:
+  rules:
+    - prefer_relative_imports
+    
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

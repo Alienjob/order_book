@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_book/src/bloc/order_book_bloc.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/widgets/order_book_dropdown_round.dart';
-import 'package:order_book/src/widgets/order_book_listening_control_button.dart';
-import 'package:order_book/src/widgets/order_book_visible_control.dart';
+import '../bloc/order_book_bloc.dart';
+import '../domain/model.dart';
+import 'order_book_dropdown_round.dart';
+import 'order_book_listening_control_button.dart';
+import 'order_book_visible_control.dart';
 
 
 

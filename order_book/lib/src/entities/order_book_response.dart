@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:order_book/src/entities/order_book_askbid_response.dart';
+import 'order_book_askbid_response.dart';
 
 part 'order_book_response.g.dart';
 

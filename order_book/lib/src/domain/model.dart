@@ -1,5 +1,5 @@
-import 'package:order_book/src/entities/order_book_askbid_entity.dart';
-import 'package:order_book/src/entities/order_book_change_entity.dart';
+import '../entities/order_book_askbid_entity.dart';
+import '../entities/order_book_change_entity.dart';
 import 'package:uuid/uuid.dart';
 import 'package:decimal/decimal.dart';
 

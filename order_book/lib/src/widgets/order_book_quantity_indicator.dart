@@ -1,8 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/service/style.dart';
+import '../domain/model.dart';
+import '../service/style.dart';
 
 
 class OrderBookQuantityIndicator extends StatelessWidget {

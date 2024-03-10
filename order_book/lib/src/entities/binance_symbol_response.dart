@@ -1,4 +1,4 @@
-import 'package:order_book/src/entities/binance_symbol_filter_response.dart';
+import 'binance_symbol_filter_response.dart';
 
 
 class BiniaceSymbolResponse {

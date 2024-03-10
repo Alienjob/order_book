@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:order_book/src/service/style.dart';
-import 'package:order_book/src/widgets/order_book_quantity_indicator.dart';
+import '../service/style.dart';
+import 'order_book_quantity_indicator.dart';
 
 class OrderBookQuantityAnimator extends StatefulWidget {
   const OrderBookQuantityAnimator({super.key, required this.child});

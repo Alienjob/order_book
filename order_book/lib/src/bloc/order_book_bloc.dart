@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/domain/order_book_control.dart';
-import 'package:order_book/src/domain/order_book_current_price.dart';
-import 'package:order_book/src/entities/market_price_entity.dart';
-import 'package:order_book/src/service/order_book_repository.dart';
+import '../domain/model.dart';
+import '../domain/order_book_control.dart';
+import '../domain/order_book_current_price.dart';
+import '../entities/market_price_entity.dart';
+import '../service/order_book_repository.dart';
 
 
 part 'order_book_state.dart';

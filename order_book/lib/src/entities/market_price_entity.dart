@@ -1,8 +1,8 @@
 
-import 'package:order_book/src/entities/currency.dart';
-import 'package:order_book/src/entities/derived_currency_list_response.dart';
-import 'package:order_book/src/entities/market_response.dart';
-import 'package:order_book/src/entities/markets_response.dart';
+import 'currency.dart';
+import 'derived_currency_list_response.dart';
+import 'market_response.dart';
+import 'markets_response.dart';
 
 enum MarketPriceSortField { name, price, priceChange, sortId }
 

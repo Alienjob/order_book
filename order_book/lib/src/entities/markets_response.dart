@@ -1,7 +1,6 @@
-import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:order_book/src/entities/market_response.dart';
+import 'market_response.dart';
 
 part "markets_response.g.dart";
 

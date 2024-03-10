@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_book/src/bloc/order_book_bloc.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/widgets/order_book_control_widget.dart';
-import 'package:order_book/src/widgets/order_book_current_price_widget.dart';
-import 'package:order_book/src/widgets/order_book_staircase_widget.dart';
+import '../bloc/order_book_bloc.dart';
+import '../domain/model.dart';
+import 'order_book_control_widget.dart';
+import 'order_book_current_price_widget.dart';
+import 'order_book_staircase_widget.dart';
 
 class OrderBookRootWidget extends StatelessWidget {
   const OrderBookRootWidget({

@@ -25,6 +25,7 @@ class _BinanceRestClient implements BinanceRestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
+    // ignore: prefer_const_declarations
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BiniaceDepthResponse>(Options(
@@ -34,7 +35,7 @@ class _BinanceRestClient implements BinanceRestClient {
     )
             .compose(
               _dio.options,
-              'depth?symbol=${symbol}&limit=1000',
+              'depth?symbol=${symbol}&limit=10',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -44,6 +45,34 @@ class _BinanceRestClient implements BinanceRestClient {
               baseUrl,
             ))));
     final value = BiniaceDepthResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BiniaceExangeInfoResponse> getExchangeInfo() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    // ignore: prefer_const_declarations
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BiniaceExangeInfoResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'exchangeInfo',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BiniaceExangeInfoResponse.fromJson(_result.data!);
     return value;
   }
 

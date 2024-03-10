@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_book/src/bloc/order_book_bloc.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/service/style.dart';
+import '../bloc/order_book_bloc.dart';
+import '../domain/model.dart';
+import '../service/style.dart';
 
 
 class BothVisibleButton extends StatelessWidget {

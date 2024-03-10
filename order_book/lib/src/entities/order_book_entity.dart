@@ -1,7 +1,7 @@
 
 
-import 'package:order_book/src/entities/order_book_askbid_entity.dart';
-import 'package:order_book/src/entities/order_book_response.dart';
+import 'order_book_askbid_entity.dart';
+import 'order_book_response.dart';
 
 class OrderBookEntity {
   String? name;

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_book/order_book.dart';
-import 'package:order_book/src/bloc/order_book_bloc.dart';
+import '../../order_book.dart';
+import '../bloc/order_book_bloc.dart';
 //import 'package:a4/app/widgets/inputs/drop_down_input.dart';
 
 class DropDownRound extends StatelessWidget {

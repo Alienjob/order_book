@@ -2,31 +2,51 @@
 import 'dart:async';
 
 import 'package:decimal/decimal.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/domain/order_book.dart';
-import 'package:order_book/src/domain/order_book_entity_set.dart';
-import 'package:order_book/src/domain/order_book_view.dart';
-import 'package:order_book/src/entities/binance_change_depth_response.dart';
-import 'package:order_book/src/entities/buy_sell.dart';
-import 'package:order_book/src/entities/market_price_entity.dart';
-import 'package:order_book/src/entities/order_book_change_entity.dart';
-import 'package:order_book/src/entities/socket_responce.dart';
-import 'package:order_book/src/service/binance_api.dart';
-import 'package:order_book/src/service/order_book_repository.dart';
+import '../domain/model.dart';
+import '../domain/order_book.dart';
+import '../domain/order_book_entity_set.dart';
+import '../domain/order_book_view.dart';
+import '../entities/binance_change_depth_response.dart';
+import '../entities/binance_exchange_info_response.dart';
+import '../entities/buy_sell.dart';
+import '../entities/currency.dart';
+import '../entities/market_price_entity.dart';
+import '../entities/order_book_change_entity.dart';
+import '../entities/socket_responce.dart';
+import 'binance_api.dart';
+import 'order_book_repository.dart';
 
 class BinanceRepository extends IOrderBookRepository {
 
   final BinanceApi api = BinanceApi();
-
+  late final BiniaceExangeInfoResponse exchangeInfo;
   BinanceRepository() {
     socketListener = api.subject.listen(socketListenerHandler);
     controller = StreamController<OrderBookViewData>();
+
   }
 
   @override
   Future<void> init({required MarketPriceEntity market}) async {
     await super.init(market: market);
     subscribeToMarket();
+    exchangeInfo = await api.getExchangeInfo();
+    
+    marketList = exchangeInfo.symbols.map((e) => MarketPriceEntity(
+      id: e.symbol.hashCode,
+      name: e.symbol,
+      fromCurrency: Currency(
+        id: e.baseAsset.hashCode,
+        name: e.baseAsset,
+      ),
+      toCurrency: Currency(
+        id: e.quoteAsset.hashCode,
+        name: e.quoteAsset,
+      ),
+
+      
+    )).toList();
+
     await loadSnapshot();
     initUpdateInterfaceTimer();
     ready = true;
@@ -34,36 +54,32 @@ class BinanceRepository extends IOrderBookRepository {
 
   @override
   Future<void> loadSnapshot() async {
-    
-    int start = DateTime.now().microsecondsSinceEpoch;
     startLoadSnapshot();
   
-    late OrderBookEntitySet _entitySet;
-    _entitySet = OrderBookEntitySet();
+    late OrderBookEntitySet entitySet;
+    entitySet = OrderBookEntitySet();
 
     try {
       final result = await api.getOrderBook(
-        symbol: (super.market?.name)!,
+        symbol: (super.market.name)!,
 
       );
       result.fold((response) {
-        _entitySet.entities.add(response);
+        entitySet.entities.add(response);
       }, (error) {
         handleError(error);
       });
     } catch (e) {
       handleError(e);
     }
-
-    _entitySet.changes = List.from(changes);
+    entitySet.changes = List.from(changes);
     changes.clear();
 
-    orderBook = OrderBook(_entitySet.makeBookData());
+    orderBook = OrderBook(entitySet.makeBookData());
     orderBookView = OrderBookView(orderBook, round);
 
     finishLoadSnapshot();
-    int end = DateTime.now().microsecondsSinceEpoch;
-    print('load snapshot in ${end - start} microseconds');
+
   }
 
   @override

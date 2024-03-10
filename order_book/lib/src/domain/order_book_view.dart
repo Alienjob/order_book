@@ -1,8 +1,8 @@
 import 'package:decimal/decimal.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/domain/order_book.dart';
-import 'package:order_book/src/entities/buy_sell.dart';
-import 'package:order_book/src/entities/order_book_change_entity.dart';
+import 'model.dart';
+import 'order_book.dart';
+import '../entities/buy_sell.dart';
+import '../entities/order_book_change_entity.dart';
 
 class OrderBookView {
   final OrderBook orderBook;

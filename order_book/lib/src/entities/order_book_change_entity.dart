@@ -1,7 +1,7 @@
 import 'package:decimal/decimal.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:order_book/src/entities/buy_sell.dart';
-import 'package:order_book/src/entities/order_book_change_response.dart';
+import 'buy_sell.dart';
+import 'order_book_change_response.dart';
 
 part "order_book_change_entity.g.dart";
 

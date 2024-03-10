@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/service/staircase_data_store.dart';
-import 'package:order_book/src/service/style.dart';
-import 'package:order_book/src/widgets/order_book_quantity_animator.dart';
-import 'package:order_book/src/widgets/order_book_quantity_indicator.dart';
+import '../domain/model.dart';
+import '../service/staircase_data_store.dart';
+import '../service/style.dart';
+import 'order_book_quantity_animator.dart';
+import 'order_book_quantity_indicator.dart';
 
 import 'package:visiblity_data_manager/visiblity_data_manager.dart';
 

@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:either_dart/either.dart';
-import 'package:order_book/src/entities/binance_depth_response.dart';
-import 'package:order_book/src/entities/binance_exchange_info_response.dart';
-import 'package:order_book/src/entities/order_book_askbid_response.dart';
-import 'package:order_book/src/entities/order_book_entity.dart';
-import 'package:order_book/src/entities/order_book_response.dart';
-import 'package:order_book/src/entities/socket_responce.dart';
+import '../entities/binance_depth_response.dart';
+import '../entities/binance_exchange_info_response.dart';
+import '../entities/order_book_askbid_response.dart';
+import '../entities/order_book_entity.dart';
+import '../entities/order_book_response.dart';
+import '../entities/socket_responce.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:flutter/services.dart' show rootBundle;
@@ -76,7 +76,7 @@ class BinanceApi {
     
   }
 
-
+  Future<BiniaceExangeInfoResponse> getExchangeInfo() => restClient.getExchangeInfo();
 }
 
 
@@ -87,4 +87,8 @@ abstract class BinanceRestClient {
 
   @GET('depth?symbol={symbol}&limit=10')
   Future<BiniaceDepthResponse> getDepth(@Path('symbol') String symbol);
+
+  @GET('exchangeInfo')
+  Future<BiniaceExangeInfoResponse> getExchangeInfo();
+
 }

@@ -1,6 +1,6 @@
 
 import 'package:decimal/decimal.dart';
-import 'package:order_book/src/entities/order_book_askbid_response.dart';
+import 'order_book_askbid_response.dart';
 
 
 class OrderBookAskBidEntity {

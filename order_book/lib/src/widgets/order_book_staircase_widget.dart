@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/service/localization.dart';
-import 'package:order_book/src/service/staircase_data_store.dart';
-import 'package:order_book/src/service/style.dart';
-import 'package:order_book/src/widgets/order_book_staircase_animator.dart';
+import '../domain/model.dart';
+import '../service/localization.dart';
+import '../service/staircase_data_store.dart';
+import '../service/style.dart';
+import 'order_book_staircase_animator.dart';
 
 import 'package:visiblity_data_manager/visiblity_data_manager.dart';
 
 class OrderBookStaircaseWidget extends StatefulWidget {
-  OrderBookStaircaseWidget({
+  const OrderBookStaircaseWidget({
     Key? key,
     required this.type,
     required this.aligement,

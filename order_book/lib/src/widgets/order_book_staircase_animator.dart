@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:declarative_animated_list/declarative_animated_list.dart';
-import 'package:order_book/src/domain/model.dart';
-import 'package:order_book/src/service/style.dart';
-import 'package:order_book/src/widgets/order_book_staircase_tile.dart';
+import '../domain/model.dart';
+import '../service/style.dart';
+import 'order_book_staircase_tile.dart';
 
 class OrderBookStaircaseAnimator extends StatelessWidget {
   const OrderBookStaircaseAnimator({

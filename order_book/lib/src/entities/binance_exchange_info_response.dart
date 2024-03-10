@@ -1,5 +1,5 @@
 
-import 'package:order_book/src/entities/binance_symbol_response.dart';
+import 'binance_symbol_response.dart';
 
 class BiniaceExangeInfoResponse {
     final String timezone;

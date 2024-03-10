@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:order_book/src/entities/derived_currency_list_response.dart';
+import 'derived_currency_list_response.dart';
 
 part "market_response.g.dart";
 
