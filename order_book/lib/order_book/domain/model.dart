@@ -1,8 +1,7 @@
-import '../entities/order_book_askbid_entity.dart';
-import '../entities/order_book_change_entity.dart';
+import '/entities/order_book_askbid_entity.dart';
+import '/entities/order_book_change_entity.dart';
 import 'package:uuid/uuid.dart';
 import 'package:decimal/decimal.dart';
-
 
 enum OrderBookCrossAxisAlignment { left, right }
 
@@ -14,11 +13,30 @@ enum OrderBookPresentationSection { ask, bid, both }
 
 enum OrderBookPresentationConfiguration { horizontal, vertical }
 
-enum OrderBookRound { x001, x01, x1, x10, x50, x100 }
+enum OrderBookRound {
+  x0000001,
+  x000001,
+  x00001,
+  x0001,
+  x001,
+  x01,
+  x1,
+  x10,
+  x50,
+  x100
+}
 
 extension OrderBookRoundExtension on OrderBookRound {
   String getName() {
     switch (this) {
+      case OrderBookRound.x0000001:
+        return 'e-6';
+      case OrderBookRound.x000001:
+        return 'e-5';
+      case OrderBookRound.x00001:
+        return 'e-4';
+      case OrderBookRound.x0001:
+        return 'e-3';
       case OrderBookRound.x001:
         return '0.01';
       case OrderBookRound.x01:
@@ -31,11 +49,22 @@ extension OrderBookRoundExtension on OrderBookRound {
         return '50';
       case OrderBookRound.x100:
         return '100';
+      default:
+        throw ArgumentError('Invalid OrderBookRound value: $this');
     }
   }
 
   Decimal getStep() {
     switch (this) {
+
+      case OrderBookRound.x0000001:
+        return Decimal.parse('0.000001');
+      case OrderBookRound.x000001:
+        return Decimal.parse('0.00001');
+      case OrderBookRound.x00001:
+        return Decimal.parse('0.0001');
+      case OrderBookRound.x0001:
+        return Decimal.parse('0.001');
       case OrderBookRound.x001:
         return Decimal.parse('0.01');
       case OrderBookRound.x01:
@@ -83,8 +112,14 @@ class OrderBookData {
     required this.bidPriceUpdateTime,
   });
 
-  OrderBookData.empty():askPriceTime= {}, askPriceQuantity= {}, bidPriceTime= {},  askPriceUpdateTime= {},  bidPriceUpdateTime= {}, bidPriceQuantity= {}, timeStamp= 0;
-  
+  OrderBookData.empty()
+      : askPriceTime = {},
+        askPriceQuantity = {},
+        bidPriceTime = {},
+        askPriceUpdateTime = {},
+        bidPriceUpdateTime = {},
+        bidPriceQuantity = {},
+        timeStamp = 0;
 }
 
 class OrderBookTileData {
@@ -109,7 +144,7 @@ class OrderBookTileConfig {
   OrderBookTileConfig({
     required this.type,
     required this.aligement,
-    required this.configuration, 
+    required this.configuration,
   });
 }
 

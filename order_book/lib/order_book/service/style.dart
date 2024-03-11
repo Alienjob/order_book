@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../entities/buy_sell.dart';
+import '/entities/buy_sell.dart';
 
 class OrderBookStyle {
   static const double cellHeight = 25.0;

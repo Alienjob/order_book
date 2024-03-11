@@ -6,20 +6,20 @@ import '../domain/model.dart';
 import '../domain/order_book.dart';
 import '../domain/order_book_entity_set.dart';
 import '../domain/order_book_view.dart';
-import '../entities/binance_change_depth_response.dart';
-import '../entities/binance_exchange_info_response.dart';
-import '../entities/buy_sell.dart';
-import '../entities/currency.dart';
-import '../entities/market_price_entity.dart';
-import '../entities/order_book_change_entity.dart';
-import '../entities/socket_responce.dart';
+import '/entities/binance_change_depth_response.dart';
+import '/entities/binance_exchange_info_response.dart';
+import '/entities/buy_sell.dart';
+import '/entities/currency.dart';
+import '/entities/market_price_entity.dart';
+import '/entities/order_book_change_entity.dart';
+import '/entities/socket_responce.dart';
 import 'binance_api.dart';
 import 'order_book_repository.dart';
 
 class BinanceRepository extends IOrderBookRepository {
 
   final BinanceApi api = BinanceApi();
-  late final BiniaceExangeInfoResponse exchangeInfo;
+  BiniaceExangeInfoResponse? exchangeInfo;
   BinanceRepository() {
     socketListener = api.subject.listen(socketListenerHandler);
     controller = StreamController<OrderBookViewData>();
@@ -30,9 +30,9 @@ class BinanceRepository extends IOrderBookRepository {
   Future<void> init({required MarketPriceEntity market}) async {
     await super.init(market: market);
     subscribeToMarket();
-    exchangeInfo = await api.getExchangeInfo();
+    exchangeInfo ??= await api.getExchangeInfo();
     
-    marketList = exchangeInfo.symbols.map((e) => MarketPriceEntity(
+    marketList = exchangeInfo!.symbols.map((e) => MarketPriceEntity(
       id: e.symbol.hashCode,
       name: e.symbol,
       fromCurrency: Currency(

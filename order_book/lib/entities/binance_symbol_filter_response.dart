@@ -1,4 +1,3 @@
-
 sealed class BiniaceSymbolFilterResponse {
   static BiniaceSymbolFilterResponse fromJson(Map<String, dynamic> json) {
     return switch (json['filterType']) {
@@ -20,6 +19,8 @@ sealed class BiniaceSymbolFilterResponse {
         BiniaceSymbolFilterMaxNumOrdersResponse.fromJson(json),
       (BiniaceSymbolFilterMaxNumAlgoOrdersResponse.filterType) =>
         BiniaceSymbolFilterMaxNumAlgoOrdersResponse.fromJson(json),
+      (BiniaceSymbolFilterMaxPositionResponse.filterType) =>
+        BiniaceSymbolFilterMaxPositionResponse.fromJson(json),
       _ => throw 'BiniaceSymbolFilterResponse unexpected filer type'
     };
   }
@@ -46,7 +47,7 @@ class BiniaceSymbolFilterPriceResponse extends BiniaceSymbolFilterResponse {
       );
 }
 
-class BiniaceSymbolFilterLotSizeResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterLotSizeResponse extends BiniaceSymbolFilterResponse {
   static const filterType = 'LOT_SIZE';
 
   final String minQty;
@@ -68,7 +69,8 @@ class BiniaceSymbolFilterLotSizeResponse  extends BiniaceSymbolFilterResponse{
       );
 }
 
-class BiniaceSymbolFilterIcebergPartsResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterIcebergPartsResponse
+    extends BiniaceSymbolFilterResponse {
   static const filterType = 'ICEBERG_PARTS';
 
   final int limit;
@@ -84,7 +86,8 @@ class BiniaceSymbolFilterIcebergPartsResponse  extends BiniaceSymbolFilterRespon
       );
 }
 
-class BiniaceSymbolFilterMarketLotSizeResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterMarketLotSizeResponse
+    extends BiniaceSymbolFilterResponse {
   static const filterType = 'MARKET_LOT_SIZE';
 
   final String minQty;
@@ -106,7 +109,8 @@ class BiniaceSymbolFilterMarketLotSizeResponse  extends BiniaceSymbolFilterRespo
       );
 }
 
-class BiniaceSymbolFilterTrailingDeltaResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterTrailingDeltaResponse
+    extends BiniaceSymbolFilterResponse {
   static const filterType = 'TRAILING_DELTA';
 
   final int minTrailingAboveDelta;
@@ -131,7 +135,8 @@ class BiniaceSymbolFilterTrailingDeltaResponse  extends BiniaceSymbolFilterRespo
       );
 }
 
-class BiniaceSymbolFilterPercentPriceBySideResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterPercentPriceBySideResponse
+    extends BiniaceSymbolFilterResponse {
   static const filterType = 'PERCENT_PRICE_BY_SIDE';
 
   final String bidMultiplierUp;
@@ -159,7 +164,7 @@ class BiniaceSymbolFilterPercentPriceBySideResponse  extends BiniaceSymbolFilter
       );
 }
 
-class BiniaceSymbolFilterNotionalResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterNotionalResponse extends BiniaceSymbolFilterResponse {
   static const filterType = 'NOTIONAL';
 
   final String minNotional;
@@ -187,39 +192,53 @@ class BiniaceSymbolFilterNotionalResponse  extends BiniaceSymbolFilterResponse{
       );
 }
 
-class BiniaceSymbolFilterMaxNumOrdersResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterMaxNumOrdersResponse
+    extends BiniaceSymbolFilterResponse {
   static const filterType = 'MAX_NUM_ORDERS';
 
   final int maxNumOrders;
 
   BiniaceSymbolFilterMaxNumOrdersResponse({
     required this.maxNumOrders,
-
   });
 
   factory BiniaceSymbolFilterMaxNumOrdersResponse.fromJson(
           Map<String, dynamic> json) =>
       BiniaceSymbolFilterMaxNumOrdersResponse(
         maxNumOrders: json["maxNumOrders"],
-
       );
 }
 
-class BiniaceSymbolFilterMaxNumAlgoOrdersResponse  extends BiniaceSymbolFilterResponse{
+class BiniaceSymbolFilterMaxNumAlgoOrdersResponse
+    extends BiniaceSymbolFilterResponse {
   static const filterType = 'MAX_NUM_ALGO_ORDERS';
 
   final int maxNumAlgoOrders;
 
   BiniaceSymbolFilterMaxNumAlgoOrdersResponse({
     required this.maxNumAlgoOrders,
-
   });
 
   factory BiniaceSymbolFilterMaxNumAlgoOrdersResponse.fromJson(
           Map<String, dynamic> json) =>
       BiniaceSymbolFilterMaxNumAlgoOrdersResponse(
         maxNumAlgoOrders: json["maxNumAlgoOrders"],
-
       );
 }
 
+class BiniaceSymbolFilterMaxPositionResponse
+    extends BiniaceSymbolFilterResponse {
+  static const filterType = 'MAX_POSITION';
+
+  final double maxPosition;
+
+  BiniaceSymbolFilterMaxPositionResponse({
+    required this.maxPosition,
+  });
+
+  factory BiniaceSymbolFilterMaxPositionResponse.fromJson(
+          Map<String, dynamic> json) =>
+      BiniaceSymbolFilterMaxPositionResponse(
+        maxPosition: double.parse(json["maxPosition"]) ,
+      );
+}

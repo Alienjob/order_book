@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:either_dart/either.dart';
-import '../entities/binance_depth_response.dart';
-import '../entities/binance_exchange_info_response.dart';
-import '../entities/order_book_askbid_response.dart';
-import '../entities/order_book_entity.dart';
-import '../entities/order_book_response.dart';
-import '../entities/socket_responce.dart';
+import '/entities/binance_depth_response.dart';
+import '/entities/binance_exchange_info_response.dart';
+import '/entities/order_book_askbid_response.dart';
+import '/entities/order_book_entity.dart';
+import '/entities/order_book_response.dart';
+import '/entities/socket_responce.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:flutter/services.dart' show rootBundle;

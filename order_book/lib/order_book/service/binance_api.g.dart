@@ -25,7 +25,6 @@ class _BinanceRestClient implements BinanceRestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    // ignore: prefer_const_declarations
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BiniaceDepthResponse>(Options(
@@ -53,7 +52,6 @@ class _BinanceRestClient implements BinanceRestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    // ignore: prefer_const_declarations
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BiniaceExangeInfoResponse>(Options(

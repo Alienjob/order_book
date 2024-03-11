@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:decimal/decimal.dart';
 import 'model.dart';
-import '../entities/buy_sell.dart';
-import '../entities/order_book_askbid_entity.dart';
-import '../entities/order_book_change_entity.dart';
-import '../entities/order_book_entity.dart';
+import '/entities/buy_sell.dart';
+import '/entities/order_book_askbid_entity.dart';
+import '/entities/order_book_change_entity.dart';
+import '/entities/order_book_entity.dart';
 
 class OrderBookEntitySet {
   List<OrderBookEntity> entities = List.empty(growable: true);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:order_book_test/pages/binance_page.dart';
-import 'package:order_book_test/pages/mock_page.dart';
+import 'package:order_book_test/pages/binance_order_book_page.dart';
+import 'package:order_book_test/pages/mock_order_book_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,23 +30,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _useMock = true;
+  int indexBottomNavbar = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(_useMock?'Mock repository':'Binance repository'),
-        actions: [
-          Switch(
-            value: _useMock,
-            onChanged: (_) => setState(() {
-              _useMock = !_useMock;
-            }),
-          )
+        title: Text((indexBottomNavbar == 0) ? 'Mock repository' : 'Binance repository'),
+      ),
+      body: (indexBottomNavbar == 0) ? const MockOrderBookPage() : const BinanceOrderBookPage(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: indexBottomNavbar,
+        onTap: (value) {
+          setState(() {
+            indexBottomNavbar = value;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shuffle),
+            label: 'Mock',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.currency_bitcoin),
+            label: 'Binance',
+          ),
         ],
       ),
-      body: _useMock ? const MockPage() : const BinancePage(),
     );
   }
 }

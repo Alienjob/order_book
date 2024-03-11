@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:decimal/decimal.dart';
 import '../domain/order_book.dart';
-import '../entities/buy_sell.dart';
-import '../entities/order_book_change_entity.dart';
+import '/entities/buy_sell.dart';
+import '/entities/order_book_change_entity.dart';
 
 class MockExchange {
   final Random _rand = Random();

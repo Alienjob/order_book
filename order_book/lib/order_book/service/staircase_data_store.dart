@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import '../../order_book.dart';
 import 'package:visiblity_data_manager/visiblity_data_manager.dart';
+
+import '../domain/model.dart';
 
 class StaircaseData {
   final double minTotal;

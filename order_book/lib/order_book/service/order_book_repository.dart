@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import '../domain/model.dart';
 import '../domain/order_book.dart';
 import '../domain/order_book_view.dart';
-import '../entities/currency.dart';
-import '../entities/market_price_entity.dart';
-import '../entities/order_book_change_entity.dart';
-import '../entities/socket_responce.dart';
+import '/entities/currency.dart';
+import '/entities/market_price_entity.dart';
+import '/entities/order_book_change_entity.dart';
+import '/entities/socket_responce.dart';
 import 'style.dart';
 
 class IOrderBookRepository {

@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../domain/model.dart';
 import '../domain/order_book_control.dart';
 import '../domain/order_book_current_price.dart';
-import '../entities/market_price_entity.dart';
+import '/entities/market_price_entity.dart';
 import '../service/order_book_repository.dart';
 
 
@@ -81,8 +81,6 @@ class OrderBookBloc extends Bloc<OrderBookEvent, OrderBookState> {
     _listener = repository.stream.listen((response) {
       add(OrderBookEvent.dataRecieved(data: response));
     });
-
-    repository.init(market: market);
   }
 
   @override
