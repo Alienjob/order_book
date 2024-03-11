@@ -22,7 +22,7 @@ class DropDownRound extends StatelessWidget {
                       child: Text(e.getName()),
                     ))
                 .toList(),
-            value: OrderBookRound.values[0],
+            value: state.control?.round,
             onChanged: (OrderBookRound? value) {
               if (value != null) {
                 final bloc = BlocProvider.of<OrderBookBloc>(context);
