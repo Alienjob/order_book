@@ -5,11 +5,12 @@ import 'bloc/market_list_bloc.dart';
 import 'domain/market_list_repository.dart';
 
 class MarketListWidget extends StatelessWidget {
-  const MarketListWidget({super.key});
-
+  const MarketListWidget({super.key, required this.repository});
+  final IMarketListRepository repository;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MarketListBlocWrapper(repository: repository,
+    child: const Placeholder());
   }
 }
 

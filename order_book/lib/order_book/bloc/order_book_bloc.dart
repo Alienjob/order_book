@@ -5,8 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../domain/model.dart';
 import '../domain/order_book_control.dart';
 import '../domain/order_book_current_price.dart';
+import '../domain/order_book_repository.dart';
 import '/entities/market_price_entity.dart';
-import '../service/order_book_repository.dart';
+
 
 
 part 'order_book_state.dart';

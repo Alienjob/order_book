@@ -7,6 +7,7 @@ class MockOrderBookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OrderBookPage(repository: MockRepository());
+    //return OrderBookPage(repository: MockRepository());
+    return MarketListWidget(repository: MockMarketListRepository());
   }
 }

@@ -2,9 +2,11 @@
 import 'dart:async';
 
 import 'package:decimal/decimal.dart';
+import '../../api/binance_api.dart';
 import '../domain/model.dart';
 import '../domain/order_book.dart';
 import '../domain/order_book_entity_set.dart';
+import '../domain/order_book_repository.dart';
 import '../domain/order_book_view.dart';
 import '/entities/binance_change_depth_response.dart';
 import '/entities/binance_exchange_info_response.dart';
@@ -13,8 +15,6 @@ import '/entities/currency.dart';
 import '/entities/market_price_entity.dart';
 import '/entities/order_book_change_entity.dart';
 import '/entities/socket_responce.dart';
-import 'binance_api.dart';
-import 'order_book_repository.dart';
 
 class BinanceRepository extends IOrderBookRepository {
 

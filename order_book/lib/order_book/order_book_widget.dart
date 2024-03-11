@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/order_book_bloc.dart';
 import 'domain/model.dart';
 import '/entities/market_price_entity.dart';
-import 'service/order_book_repository.dart';
+import 'domain/order_book_repository.dart';
 import 'widgets/order_book_root_widget.dart';
 
 
